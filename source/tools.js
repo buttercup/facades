@@ -44,20 +44,20 @@ function createFieldDescriptor(
 /**
  * Get a value on an entry for a specific property type
  * @param {Entry} entry The entry instance
- * @param {String} property The type of entry property (property/attribute)
+ * @param {String} field The type of entry property (property/attribute)
  * @param {String} name The property name
  * @returns {String} The property value
  * @throws {Error} Throws for unknown property types
  * @deprecated Not in use - To be removed
  */
-function getEntryValue(entry, property, name) {
-    switch (property) {
+function getEntryValue(entry, field, name) {
+    switch (field) {
         case "property":
             return entry.getProperty(name);
         case "attribute":
             return entry.getAttribute(name);
         default:
-            throw new Error(`Cannot retrieve value: Unknown property type: ${property}`);
+            throw new Error(`Cannot retrieve value: Unknown property type: ${field}`);
     }
 }
 
