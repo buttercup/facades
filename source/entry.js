@@ -11,7 +11,8 @@ const { createFieldDescriptor } = require("./tools.js");
  * @returns {Array.<EntryFacadeField>} A new array with all combined fields
  */
 function addExtraFieldsNonDestructive(entry, fields) {
-    const exists = propName => fields.find(item => item.field === "property" && item.property === propName);
+    const exists = propName =>
+        fields.find(item => item.field === "property" && item.property === propName);
     const properties = entry.toObject().properties || {};
     return [
         ...fields,
@@ -57,7 +58,11 @@ function consumeEntryFacade(entry, facade) {
         const properties = entry.getProperty();
         const attributes = entry.getAttribute();
         if (facade.type !== facadeType) {
-            throw new Error(`Failed consuming entry data: Expected type "${facadeType}" but received "${facade.type}"`);
+            throw new Error(
+                `Failed consuming entry data: Expected type "${facadeType}" but received "${
+                    facade.type
+                }"`
+            );
         }
         // update data
         (facade.fields || []).forEach(field => applyFieldDescriptor(entry, field));

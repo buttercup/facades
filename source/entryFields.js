@@ -68,7 +68,10 @@ function createLoginFields(entry) {
 }
 
 function createNoteFields(entry) {
-    return [...createBaseFields(entry), createFieldDescriptor(entry, "Note", "property", "note", { multiline: true })];
+    return [
+        ...createBaseFields(entry),
+        createFieldDescriptor(entry, "Note", "property", "note", { multiline: true })
+    ];
 }
 
 function createSSHKeyFields(entry) {
