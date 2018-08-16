@@ -34,6 +34,7 @@ function addExtraFieldsNonDestructive(entry, fields) {
 /**
  * Entry facade for data input
  * @typedef {Object} EntryFacade
+ * @property {String} id - The entry ID
  * @property {String} type - The type of the facade
  * @property {Array.<EntryFacadeField>} fields - An array of fields
  */
@@ -106,6 +107,7 @@ function createEntryFacade(entry) {
     }
     const fields = createFields(entry);
     return {
+        id: entry.id,
         type: facadeType,
         fields: addExtraFieldsNonDestructive(entry, fields)
     };
