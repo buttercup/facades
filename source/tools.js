@@ -13,7 +13,8 @@
 
 /**
  * Create a descriptor for a field to be used within a facade
- * @param {Entry} entry The entry instance to process
+ * @param {Entry|null} entry The entry instance to process or null if the initial value
+ *  should be empty
  * @param {String} title The field title
  * @param {String} entryPropertyType The type of entry property (property/attribute)
  * @param {String} entryPropertyName The name of the property
@@ -27,7 +28,7 @@ function createFieldDescriptor(
     entryPropertyName,
     { multiline = false, secret = false, formatting = false, removeable = false } = {}
 ) {
-    const value = getEntryValue(entry, entryPropertyType, entryPropertyName);
+    const value = entry ? getEntryValue(entry, entryPropertyType, entryPropertyName) : "";
     return {
         title,
         field: entryPropertyType,
