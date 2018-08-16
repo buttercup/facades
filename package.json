@@ -1,0 +1,30 @@
+{
+  "name": "@buttercup/facades",
+  "version": "0.0.0",
+  "description": "Archive and Entry facade management for data transfer and application",
+  "main": "source/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buttercup/facades.git"
+  },
+  "keywords": [
+    "facade",
+    "facades",
+    "buttercup"
+  ],
+  "author": "Perry Mitchell <perry@perrymitchell.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buttercup/facades/issues"
+  },
+  "homepage": "https://github.com/buttercup/facades#readme",
+  "devDependencies": {
+    "buttercup": "^2.4.0"
+  }
+}
