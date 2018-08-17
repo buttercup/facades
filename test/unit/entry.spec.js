@@ -9,7 +9,8 @@ describe("entry", function() {
             this.entry
                 .setProperty("username", "u12345")
                 .setProperty("password", "passw0rd")
-                .setProperty("URL", "https://bank.com");
+                .setProperty("URL", "https://bank.com")
+                .setAttribute("BC_TEST", "test");
         });
 
         it("outputs the correct facade type", function() {
@@ -31,6 +32,14 @@ describe("entry", function() {
             expect(() => {
                 createEntryFacade(this.entry);
             }).to.throw(/No.+found for type/i);
+        });
+
+        it("outputs attributes", function() {
+            const { fields } = createEntryFacade(this.entry);
+            const attr = fields.find(field => field.property === "BC_TEST");
+            expect(attr).to.be.an("object");
+            expect(attr).to.have.property("field", "attribute");
+            expect(attr).to.have.property("value", "test");
         });
     });
 });

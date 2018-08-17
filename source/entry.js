@@ -12,13 +12,13 @@ const { ENTRY_FACADE_TYPE_ATTRIBUTE } = require("./symbols.js");
  * @returns {Array.<EntryFacadeField>} A new array with all combined fields
  */
 function addExtraFieldsNonDestructive(entry, fields) {
-    const exists = propName =>
-        fields.find(item => item.field === "property" && item.property === propName);
-    const properties = entry.toObject().properties || {};
+    const exists = (propName, fieldType) =>
+        fields.find(item => item.field === fieldType && item.property === propName);
+    const { properties = {}, attributes = {} } = entry.toObject();
     return [
         ...fields,
         ...Object.keys(properties)
-            .filter(name => !exists(name))
+            .filter(name => !exists(name, "property"))
             .map(name =>
                 createFieldDescriptor(
                     entry, // Entry instance
@@ -26,6 +26,16 @@ function addExtraFieldsNonDestructive(entry, fields) {
                     "property", // Type
                     name, // Property name
                     { removeable: true }
+                )
+            ),
+        ...Object.keys(attributes)
+            .filter(name => !exists(name, "attribute"))
+            .map(name =>
+                createFieldDescriptor(
+                    entry, // Entry instance
+                    name, // Title
+                    "attribute", // Type
+                    name // Property name
                 )
             )
     ];
