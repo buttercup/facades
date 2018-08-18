@@ -9,6 +9,7 @@ function createArchiveFacade(archive) {
     return {
         type: "archive",
         id: archive.id,
+        attributes: archive.getAttribute(),
         groups: getGroupsFacades(archive, "0"),
         entries
     };
@@ -36,7 +37,7 @@ function getEntriesFacades(entryCollection, groupID) {
 
 function getGroupsFacades(groupCollection, parentID) {
     const facades = groupCollection.getGroups().map(group => createGroupFacade(group, parentID));
-    groupCollection.forEach(group => {
+    groupCollection.getGroups().forEach(group => {
         facades.push(...getGroupsFacades(group.getGroups(), group.id));
     });
     return facades;
