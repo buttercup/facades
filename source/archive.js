@@ -38,7 +38,7 @@ function getEntriesFacades(entryCollection, groupID) {
 function getGroupsFacades(groupCollection, parentID) {
     const facades = groupCollection.getGroups().map(group => createGroupFacade(group, parentID));
     groupCollection.getGroups().forEach(group => {
-        facades.push(...getGroupsFacades(group.getGroups(), group.id));
+        facades.push(...getGroupsFacades(group, group.id));
     });
     return facades;
 }
