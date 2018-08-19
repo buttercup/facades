@@ -97,6 +97,7 @@ function consumeArchiveFacade(archive, facade) {
 function consumeGroupFacade(group, facade) {
     const { id, title, type, attributes } = facade;
     const existingEntries = group.getEntries();
+    const existingAttributes = group.getAttribute();
     if (type !== "group") {
         throw new Error(`Failed consuming group facade: Invalid facade type: ${type}`);
     }
@@ -110,7 +111,19 @@ function consumeGroupFacade(group, facade) {
     if (group.getTitle() !== title) {
         group.setTitle(title);
     }
-    // @todo attributes
+    // Check attributes
+    Object.keys(existingAttributes)
+        .filter(attr => !attributes.hasOwnProperty(attr))
+        .forEach(attr => {
+            // Remove missing
+            group.deleteAttribute(attr);
+        });
+    Object.keys(attributes).forEach(attr => {
+        if (!existingAttributes[attr] || existingAttributes[attr] !== attributes[attr]) {
+            // Different value
+            group.setAttribute(attr, attributes[attr]);
+        }
+    });
 }
 
 function createArchiveFacade(archive) {
@@ -127,11 +140,11 @@ function createArchiveFacade(archive) {
 }
 
 function createGroupFacade(group, parentID = "0") {
-    // @todo attributes
     return {
         type: "group",
         id: group ? group.id : null,
         title: group ? group.getTitle() : "",
+        attributes: group ? group.getAttribute() : {},
         parentID
     };
 }
