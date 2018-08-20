@@ -9,6 +9,7 @@
     "test": "run-s test:all test:format",
     "test:all": "nyc mocha -r test/index.js 'test/**/*.spec.js'",
     "test:format": "prettier-check '{source,test}/**/*.js'",
+    "test:integration": "mocha -r test/index.js 'test/integration/**/*.spec.js'",
     "test:unit": "mocha -r test/index.js 'test/unit/**/*.spec.js'"
   },
   "lint-staged": {

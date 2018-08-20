@@ -103,11 +103,11 @@ function consumeEntryFacade(entry, facade) {
 
 /**
  * Create a data/input facade for an Entry instance
- * @param {Entry} entry The Entry instance
+ * @param {Entry=} entry The Entry instance
  * @returns {EntryFacade} A newly created facade
  */
 function createEntryFacade(entry) {
-    if (!entry || entry.type !== "Entry") {
+    if (entry && entry.type !== "Entry") {
         throw new Error("Failed creating entry facade: Provided item is not an Entry");
     }
     const facadeType = getEntryFacadeType(entry);
@@ -115,11 +115,14 @@ function createEntryFacade(entry) {
     if (!createFields) {
         throw new Error(`Failed creating entry facade: No factory found for type "${facadeType}"`);
     }
-    const fields = createFields(entry);
+    const fields = entry
+        ? addExtraFieldsNonDestructive(entry, createFields(entry))
+        : createFields(entry);
     return {
-        id: entry.id,
+        id: entry ? entry.id : null,
         type: facadeType,
-        fields: addExtraFieldsNonDestructive(entry, fields)
+        fields,
+        parentID: entry ? entry.getGroup().id : null
     };
 }
 
@@ -129,6 +132,9 @@ function createEntryFacade(entry) {
  * @returns {String} The facade type
  */
 function getEntryFacadeType(entry) {
+    if (!entry) {
+        return "login";
+    }
     return entry.getAttribute(ENTRY_FACADE_TYPE_ATTRIBUTE) || "login";
 }
 

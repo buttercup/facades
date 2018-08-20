@@ -1,6 +1,18 @@
 const { consumeEntryFacade, createEntryFacade } = require("./entry.js");
 
 function consumeArchiveFacade(archive, facade) {
+    if (!archive || (archive && archive.type !== "Archive")) {
+        throw new Error(
+            "Failed consuming archive facade: First parameter expected to be an Archive instance"
+        );
+    }
+    if (!facade || (facade && facade.type !== "archive")) {
+        throw new Error(
+            `Failed consuming archive facade: Second parameter expected to be an archive facade, got: ${
+                facade.type
+            }`
+        );
+    }
     const { id, type, attributes, groups, entries } = facade;
     if (type !== "archive") {
         throw new Error(`Failed consuming archive facade: Invalid facade type: ${type}`);
@@ -69,7 +81,7 @@ function consumeArchiveFacade(archive, facade) {
             const refGroup = ref.getGroup();
             if (refGroup.id !== entryFacade.parentID) {
                 // Entry has different group, so move
-                ref.moveToGroup(entryFacade.parentID);
+                ref.moveToGroup(archive.findGroupByID(entryFacade.parentID));
             }
         } else {
             // Handle entry addition
@@ -150,11 +162,9 @@ function createGroupFacade(group, parentID = "0") {
 }
 
 function getEntriesFacades(entryCollection, groupID) {
-    const facades = entryCollection.getEntries().map(entry =>
-        Object.assign({}, createEntryFacade(entry), {
-            parentID: groupID
-        })
-    );
+    const facades = entryCollection
+        .getEntries()
+        .map(entry => Object.assign({}, createEntryFacade(entry)));
     entryCollection.getGroups().forEach(group => {
         facades.push(...getEntriesFacades(group, group.id));
     });
