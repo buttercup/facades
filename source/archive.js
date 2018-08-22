@@ -181,6 +181,7 @@ function getGroupsFacades(groupCollection, parentID) {
 
 module.exports = {
     consumeArchiveFacade,
+    consumeGroupFacade,
     createArchiveFacade,
     createGroupFacade
 };
