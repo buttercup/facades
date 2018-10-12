@@ -37,15 +37,15 @@
   },
   "homepage": "https://github.com/buttercup/facades#readme",
   "devDependencies": {
-    "buttercup": "^2.4.0",
-    "chai": "^4.1.2",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.2.2",
+    "buttercup": "^2.6.5",
+    "chai": "^4.2.0",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
     "npm-run-all": "^4.1.3",
-    "nyc": "^12.0.2",
-    "prettier": "^1.14.2",
+    "nyc": "^13.0.1",
+    "prettier": "^1.14.3",
     "prettier-check": "^2.0.0",
-    "sinon": "^6.1.5"
+    "sinon": "^6.3.5"
   }
 }
