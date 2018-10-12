@@ -25,7 +25,7 @@ function consumeArchiveFacade(archive, facade) {
         );
     }
     // Create comparison facade
-    const {
+    let {
         groups: currentGroups,
         entries: currentEntries,
         attributes: currentAttributes
@@ -35,11 +35,20 @@ function consumeArchiveFacade(archive, facade) {
         const existing = groups.find(group => group.id === currentGroupFacade.id);
         if (!existing) {
             // Removed, so delete
-            archive.findGroupByID(currentGroupFacade.id).delete();
+            const targetItem = archive.findGroupByID(currentGroupFacade.id);
+            if (targetItem) {
+                // Only attempt deleting if it comes back as a result. It's possible
+                // that if a parent was deleted, the children were also removed and
+                // this call to `findGroupByID` might return nothing..
+                targetItem.delete();
+            }
+            // groups.splice(groups.findIndex(group => group.id === currentGroupFacade.id), 1);
         }
     });
+    // Update facade properties after groups deletion
+    currentGroups = createArchiveFacade(archive).groups;
     // Manage other group operations
-    groups.forEach(groupRaw => {
+    groups.filter(groupRaw => !!archive.findGroupByID(groupRaw.id)).forEach(groupRaw => {
         const groupFacade = Object.assign({}, groupRaw);
         if (groupFacade.id) {
             // Handle group move
@@ -69,13 +78,22 @@ function consumeArchiveFacade(archive, facade) {
         const existing = entries.find(entry => entry.id === currentEntryFacade.id);
         if (!existing) {
             // Removed, so delete
-            archive.findEntryByID(currentEntryFacade.id).delete();
+            const entry = archive.findEntryByID(currentEntryFacade.id);
+            if (entry) {
+                entry.delete();
+            }
         }
     });
+    // Update facade properties after entries deletion
+    currentEntries = createArchiveFacade(archive).entries;
     // Manage other entry operations
     entries.forEach(entryRaw => {
         const entryFacade = Object.assign({}, entryRaw);
         if (entryFacade.id) {
+            if (!currentEntries.find(entry => entry.id === entryRaw.id)) {
+                // Entry had an ID which is now gone, so it was removed
+                return;
+            }
             // Handle entry move
             const ref = archive.findEntryByID(entryFacade.id);
             const refGroup = ref.getGroup();
