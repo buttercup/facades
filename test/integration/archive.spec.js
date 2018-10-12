@@ -1,4 +1,4 @@
-const { Archive, Entry } = require("buttercup");
+const { Archive, Entry, Group } = require("buttercup");
 const { consumeArchiveFacade, createArchiveFacade } = require("../../source/archive.js");
 const { createEntryFacade } = require("../../source/entry.js");
 
@@ -58,6 +58,18 @@ describe("archive", function() {
             expect(
                 this.archive.findEntriesByProperty("title", "Test Entry")[0]
             ).to.be.an.instanceOf(Entry);
+        });
+
+        it("supports deleting groups", function() {
+            const facade = createArchiveFacade(this.archive);
+            const topGroupID = this.topGroup.id;
+            const groupIndex = facade.groups.findIndex(
+                groupFacade => groupFacade.id === topGroupID
+            );
+            facade.groups.splice(groupIndex, 1);
+            expect(this.archive.findGroupByID(topGroupID)).to.be.an.instanceOf(Group);
+            consumeArchiveFacade(this.archive, facade);
+            expect(this.archive.findGroupByID(topGroupID)).to.be.null;
         });
     });
 });
