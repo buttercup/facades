@@ -63,6 +63,7 @@ describe("archive", function() {
         it("supports deleting groups", function() {
             const facade = createArchiveFacade(this.archive);
             const topGroupID = this.topGroup.id;
+            const bottomGroupID = this.bottomGroup.id;
             const groupIndex = facade.groups.findIndex(
                 groupFacade => groupFacade.id === topGroupID
             );
@@ -70,6 +71,7 @@ describe("archive", function() {
             expect(this.archive.findGroupByID(topGroupID)).to.be.an.instanceOf(Group);
             consumeArchiveFacade(this.archive, facade);
             expect(this.archive.findGroupByID(topGroupID)).to.be.null;
+            expect(this.archive.findGroupByID(bottomGroupID)).to.be.null;
         });
     });
 });
