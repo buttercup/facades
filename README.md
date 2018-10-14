@@ -1,7 +1,7 @@
 # Facades
 > Editing facades for Buttercup vaults and content
 
-[![Build Status](https://travis-ci.org/buttercup/facades.svg?branch=master)](https://travis-ci.org/buttercup/facades)
+[![Build Status](https://travis-ci.org/buttercup/facades.svg?branch=master)](https://travis-ci.org/buttercup/facades) [![npm version](https://badge.fury.io/js/%40buttercup%2Ffacades.svg)](https://www.npmjs.com/package/@buttercup/facades)
 
 ## About
 This library contains facade functionality used for editing and applying changes to Buttercup vaults and their contained items. Facades are object representations of Buttercup's instance-based componets like `Archive`, `Group` and `Entry`. Facades can be transferred more easily than class instances and can be consumed using this library.
