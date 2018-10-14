@@ -4,6 +4,7 @@
   "description": "Archive and Entry facade management for data transfer and application",
   "main": "source/index.js",
   "scripts": {
+    "docs": "jsdoc2md './source/**/*.js' > API.md",
     "format": "prettier --write '{source,test}/**/*.js'",
     "precommit": "lint-staged",
     "test": "run-s test:all test:format",
@@ -36,10 +37,14 @@
     "url": "https://github.com/buttercup/facades/issues"
   },
   "homepage": "https://github.com/buttercup/facades#readme",
+  "peerDependencies": {
+    "buttercup": ">= 2"
+  },
   "devDependencies": {
     "buttercup": "^2.6.5",
     "chai": "^4.2.0",
     "husky": "^1.1.2",
+    "jsdoc-to-markdown": "^4.0.1",
     "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
     "npm-run-all": "^4.1.3",

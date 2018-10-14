@@ -1,5 +1,11 @@
 const { consumeEntryFacade, createEntryFacade } = require("./entry.js");
 
+/**
+ * Consume an archive facade and apply the differences to the archive
+ * instance
+ * @param {Archive} archive The archive instance to apply to
+ * @param {ArchiveFacade} facade The facade to apply
+ */
 function consumeArchiveFacade(archive, facade) {
     if (!archive || (archive && archive.type !== "Archive")) {
         throw new Error(
@@ -124,6 +130,11 @@ function consumeArchiveFacade(archive, facade) {
     });
 }
 
+/**
+ * Consume a group facade and apply the differences to a group instance
+ * @param {Group} group The group instance to apply to
+ * @param {GroupFacade} facade The facade to apply
+ */
 function consumeGroupFacade(group, facade) {
     const { id, title, type, attributes } = facade;
     const existingEntries = group.getEntries();
@@ -137,6 +148,9 @@ function consumeGroupFacade(group, facade) {
                 group.id
             }`
         );
+    }
+    if (!title || title.trim().length <= 0) {
+        throw new Error("Failed consuming group facade: Title must not be empty");
     }
     if (group.getTitle() !== title) {
         group.setTitle(title);
@@ -156,6 +170,20 @@ function consumeGroupFacade(group, facade) {
     });
 }
 
+/**
+ * @typedef {Object} ArchiveFacade
+ * @property {String} type - The facade type: "archive"
+ * @property {String} id - The archive ID
+ * @property {Object} attributes - A key/value list of all the archive attributes
+ * @property {Array.<GroupFacade>} groups - An array of group facades
+ * @property {Array.<EntryFacade>} entries - An array of entry facades
+ */
+
+/**
+ * Create an archive facade from an Archive instance
+ * @param {Archive} archive An archive instance
+ * @returns {ArchiveFacade} An archive facade
+ */
 function createArchiveFacade(archive) {
     const entries = archive
         .getGroups()
@@ -169,6 +197,22 @@ function createArchiveFacade(archive) {
     };
 }
 
+/**
+ * @typedef {Object} GroupFacade
+ * @property {String} type - The facade type: "group"
+ * @property {String|null} id - The group ID. Will be set to null if
+ *  the group is a new one
+ * @property {String} title - The group title
+ * @property {Object} attributes - A key/value list of group attributes
+ * @property {String|null} parentID - The parent group ID. Set to "0" if
+ *  it is to be created in the root.
+ */
+
+/**
+ * Create a group facade from a Group instance
+ * @param {Group} group The group instance
+ * @param {String=} parentID The parent ID of the group
+ */
 function createGroupFacade(group, parentID = "0") {
     return {
         type: "group",
@@ -179,6 +223,12 @@ function createGroupFacade(group, parentID = "0") {
     };
 }
 
+/**
+ * Convert an array of entries into an array of facades
+ * @param {Array.<Entry>} entryCollection An array of entries
+ * @param {String} groupID The parent group ID
+ * @returns {Array.<EntryFacade>} An array of entry facades
+ */
 function getEntriesFacades(entryCollection, groupID) {
     const facades = entryCollection
         .getEntries()
@@ -189,6 +239,12 @@ function getEntriesFacades(entryCollection, groupID) {
     return facades;
 }
 
+/**
+ * Convert an array of groups into an array of facades
+ * @param {Array.<Group>} groupCollection An array of groups
+ * @param {String} parentID The parent group ID
+ * @returns {Array.<GroupFacade>} An array of group facades
+ */
 function getGroupsFacades(groupCollection, parentID) {
     const facades = groupCollection.getGroups().map(group => createGroupFacade(group, parentID));
     groupCollection.getGroups().forEach(group => {

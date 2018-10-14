@@ -7,8 +7,12 @@ const {
     createGroupFacade
 } = require("./archive.js");
 
+/**
+ * @exports ButtercupFacades
+ */
 module.exports = {
     consumeArchiveFacade,
+    consumeGroupFacade,
     consumeEntryFacade,
     createArchiveFacade,
     createEntryFacade,
