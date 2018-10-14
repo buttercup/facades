@@ -35,3 +35,8 @@ facade.entries.push(entryFacade);
 // Write changes back to archive
 consumeArchiveFacade(archive, facade);
 ```
+
+You can read about the various facade properties in the [API documentation](API.md).
+
+### Important notes regarding usage
+Facade consumption is inherently destructive, so be sure that when consuming facades you're applying the correct facade instance to the original class instance. Applying the wrong facade could potentially end up deleting all items (groups and entries) from the original archive instance.
