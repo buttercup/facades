@@ -18,17 +18,18 @@ const { Archive } = require("buttercup");
 const { consumeArchiveFacade, createArchiveFacade, createEntryFacade } = require("@buttercup/facades");
 
 const archive = new Archive();
-archive.createGroup("Test");
+const group = archive.createGroup("Test");
 const facade = createArchiveFacade(archive);
 
 // Change group title
-facade.groups.find(group => group.title === "Test").title = "New Title";
+facade.groups.find(item => item.id === group.id).title = "New Title";
 
 // Add new entry
 const entryFacade = createEntryFacade();
-entryFacade.fields.find(item.field === "title").value = "New Entry";
-entryFacade.fields.find(item.field === "username").value = "user@site.com";
-entryFacade.fields.find(item.field === "password").value = "passw0rd";
+entryFacade.parentID = group.id;
+entryFacade.fields.find(item => item.property === "title").value = "New Entry";
+entryFacade.fields.find(item => item.property === "username").value = "user@site.com";
+entryFacade.fields.find(item => item.property === "password").value = "passw0rd";
 facade.entries.push(entryFacade);
 
 // Write changes back to archive
