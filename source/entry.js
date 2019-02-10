@@ -47,6 +47,7 @@ function addExtraFieldsNonDestructive(entry, fields) {
  * @property {String} id - The entry ID
  * @property {String} type - The type of the facade
  * @property {Array.<EntryFacadeField>} fields - An array of fields
+ * @property {String} parentID - The parent group ID
  */
 
 /**
