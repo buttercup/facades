@@ -54,31 +54,33 @@ function consumeArchiveFacade(archive, facade) {
     // Update facade properties after groups deletion
     currentGroups = createArchiveFacade(archive).groups;
     // Manage other group operations
-    groups.filter(groupRaw => !!archive.findGroupByID(groupRaw.id)).forEach(groupRaw => {
-        const groupFacade = Object.assign({}, groupRaw);
-        if (groupFacade.id) {
-            // Handle group move
-            const { id: groupID, parentID: groupParentID } = groupFacade;
-            const ref = archive.findGroupByID(groupID);
-            const refGroup = ref.getGroup();
-            if (
-                (refGroup === null && groupParentID !== "0") ||
-                (refGroup !== null && refGroup.id !== groupParentID)
-            ) {
-                // Group has different parent, so move
-                ref.moveToGroup(groupParentID);
+    groups
+        .filter(groupRaw => !!archive.findGroupByID(groupRaw.id))
+        .forEach(groupRaw => {
+            const groupFacade = Object.assign({}, groupRaw);
+            if (groupFacade.id) {
+                // Handle group move
+                const { id: groupID, parentID: groupParentID } = groupFacade;
+                const ref = archive.findGroupByID(groupID);
+                const refGroup = ref.getGroup();
+                if (
+                    (refGroup === null && groupParentID !== "0") ||
+                    (refGroup !== null && refGroup.id !== groupParentID)
+                ) {
+                    // Group has different parent, so move
+                    ref.moveToGroup(groupParentID);
+                }
+            } else {
+                // Handle group addition
+                const targetParent =
+                    groupFacade.parentID === "0"
+                        ? archive
+                        : archive.findGroupByID(groupFacade.parentID);
+                const newGroupInst = targetParent.createGroup(newGroup.title);
+                groupFacade.id = newGroupInst.id;
             }
-        } else {
-            // Handle group addition
-            const targetParent =
-                groupFacade.parentID === "0"
-                    ? archive
-                    : archive.findGroupByID(groupFacade.parentID);
-            const newGroupInst = targetParent.createGroup(newGroup.title);
-            groupFacade.id = newGroupInst.id;
-        }
-        consumeGroupFacade(archive.findGroupByID(groupFacade.id), groupFacade);
-    });
+            consumeGroupFacade(archive.findGroupByID(groupFacade.id), groupFacade);
+        });
     // Handle entry removal
     currentEntries.forEach(currentEntryFacade => {
         const existing = entries.find(entry => entry.id === currentEntryFacade.id);
