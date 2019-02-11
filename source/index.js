@@ -6,11 +6,23 @@ const {
     createArchiveFacade,
     createGroupFacade
 } = require("./archive.js");
+const {
+    ENTRY_TYPE_CREDITCARD,
+    ENTRY_TYPE_LOGIN,
+    ENTRY_TYPE_NOTE,
+    ENTRY_TYPE_SSHKEY,
+    ENTRY_TYPE_WEBSITE
+} = require("./symbols.js");
 
 /**
  * @exports ButtercupFacades
  */
 module.exports = {
+    ENTRY_TYPE_CREDITCARD,
+    ENTRY_TYPE_LOGIN,
+    ENTRY_TYPE_NOTE,
+    ENTRY_TYPE_SSHKEY,
+    ENTRY_TYPE_WEBSITE,
     consumeArchiveFacade,
     consumeGroupFacade,
     consumeEntryFacade,

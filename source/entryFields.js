@@ -1,4 +1,11 @@
 const { createFieldDescriptor, getEntryValue } = require("./tools.js");
+const {
+    ENTRY_TYPE_CREDITCARD,
+    ENTRY_TYPE_LOGIN,
+    ENTRY_TYPE_NOTE,
+    ENTRY_TYPE_SSHKEY,
+    ENTRY_TYPE_WEBSITE
+} = require("./symbols.js");
 
 function createBaseFields(entry) {
     return [createFieldDescriptor(entry, "Title", "property", "title")];
@@ -87,9 +94,9 @@ function createWebsiteFields(entry) {
 }
 
 module.exports = {
-    credit_card: createCreditCardFields,
-    login: createLoginFields,
-    note: createNoteFields,
-    ssh_key: createSSHKeyFields,
-    website: createWebsiteFields
+    [ENTRY_TYPE_CREDITCARD]: createCreditCardFields,
+    [ENTRY_TYPE_LOGIN]: createLoginFields,
+    [ENTRY_TYPE_NOTE]: createNoteFields,
+    [ENTRY_TYPE_SSHKEY]: createSSHKeyFields,
+    [ENTRY_TYPE_WEBSITE]: createWebsiteFields
 };
