@@ -310,6 +310,7 @@ Entry facade for data input
 | id | <code>String</code> | The entry ID |
 | type | <code>String</code> | The type of the facade |
 | fields | [<code>Array.&lt;EntryFacadeField&gt;</code>](#EntryFacadeField) | An array of fields |
+| parentID | <code>String</code> | The parent group ID |
 
 <a name="EntryFacadeField"></a>
 
