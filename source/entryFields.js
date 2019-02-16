@@ -29,7 +29,18 @@ function createCreditCardFields(entry) {
                 placeholder: "DDDD-DDDD-DDDD-DDDD"
             }
         }),
-        createFieldDescriptor(entry, "Card Type", "property", "type"),
+        createFieldDescriptor(entry, "Card Type", "property", "type", {
+            formatting: {
+                options: {
+                    visa: "Visa",
+                    mastercard: "Mastercard",
+                    amex: "American Express",
+                    discover: "Discover",
+                    generic: "Generic"
+                },
+                defaultOption: "generic"
+            }
+        }),
         createFieldDescriptor(entry, "CVV", "property", "cvv", {
             formatting: {
                 format: [{ char: /\d/, repeat: 4 }],
