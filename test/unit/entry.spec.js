@@ -1,5 +1,5 @@
 const { Archive, Entry } = require("buttercup");
-const { consumeEntryFacade, createEntryFacade } = require("../../source/entry.js");
+const { createEntryFacade } = require("../../source/entry.js");
 
 describe("entry", function() {
     describe("createEntryFacade", function() {
