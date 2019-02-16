@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v0.4.1
+_2019-02-16_
+
+ * Specify Credit Card type formatting _options_ (for dropdowns)
+
 ## v0.4.0
 _2019-02-16_
 
