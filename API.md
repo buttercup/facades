@@ -40,7 +40,7 @@ Takes data from the descriptor and writes it to the entry.</p>
 <dt><a href="#consumeEntryFacade">consumeEntryFacade(entry, facade)</a></dt>
 <dd><p>Process a modified entry facade</p>
 </dd>
-<dt><a href="#createEntryFacade">createEntryFacade([entry])</a> ⇒ <code><a href="#EntryFacade">EntryFacade</a></code></dt>
+<dt><a href="#createEntryFacade">createEntryFacade([entry], [ops])</a> ⇒ <code><a href="#EntryFacade">EntryFacade</a></code></dt>
 <dd><p>Create a data/input facade for an Entry instance</p>
 </dd>
 <dt><a href="#getEntryFacadeType">getEntryFacadeType(entry)</a> ⇒ <code>String</code></dt>
@@ -67,6 +67,8 @@ Takes data from the descriptor and writes it to the entry.</p>
 <dt><a href="#EntryFacade">EntryFacade</a> : <code>Object</code></dt>
 <dd><p>Entry facade for data input</p>
 </dd>
+<dt><a href="#CreateEntryFacadeOptions">CreateEntryFacadeOptions</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#EntryFacadeField">EntryFacadeField</a> : <code>Object</code></dt>
 <dd><p>Entry facade data field</p>
 </dd>
@@ -193,7 +195,7 @@ Process a modified entry facade
 
 <a name="createEntryFacade"></a>
 
-## createEntryFacade([entry]) ⇒ [<code>EntryFacade</code>](#EntryFacade)
+## createEntryFacade([entry], [ops]) ⇒ [<code>EntryFacade</code>](#EntryFacade)
 Create a data/input facade for an Entry instance
 
 **Kind**: global function  
@@ -202,6 +204,7 @@ Create a data/input facade for an Entry instance
 | Param | Type | Description |
 | --- | --- | --- |
 | [entry] | <code>Entry</code> | The Entry instance |
+| [ops] | [<code>CreateEntryFacadeOptions</code>](#CreateEntryFacadeOptions) | Options for the entry facade creation |
 
 <a name="getEntryFacadeType"></a>
 
@@ -311,6 +314,16 @@ Entry facade for data input
 | type | <code>String</code> | The type of the facade |
 | fields | [<code>Array.&lt;EntryFacadeField&gt;</code>](#EntryFacadeField) | An array of fields |
 | parentID | <code>String</code> | The parent group ID |
+
+<a name="CreateEntryFacadeOptions"></a>
+
+## CreateEntryFacadeOptions : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [type] | <code>String</code> | Optionally override the created facade type |
 
 <a name="EntryFacadeField"></a>
 

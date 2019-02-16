@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v0.4.0
+_2019-02-16_
+
+ * Possibility to override new entry facade type in `createEntryFacade`
+
 ## v0.3.0
 _2019-02-11_
 
