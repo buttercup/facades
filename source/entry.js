@@ -103,15 +103,21 @@ function consumeEntryFacade(entry, facade) {
 }
 
 /**
+ * @typedef {Object} CreateEntryFacadeOptions
+ * @property {String=} type - Optionally override the created facade type
+ */
+
+/**
  * Create a data/input facade for an Entry instance
  * @param {Entry=} entry The Entry instance
+ * @param {CreateEntryFacadeOptions=} ops Options for the entry facade creation
  * @returns {EntryFacade} A newly created facade
  */
-function createEntryFacade(entry) {
+function createEntryFacade(entry, { type } = {}) {
     if (entry && entry.type !== "Entry") {
         throw new Error("Failed creating entry facade: Provided item is not an Entry");
     }
-    const facadeType = getEntryFacadeType(entry);
+    const facadeType = type || getEntryFacadeType(entry);
     const createFields = facadeFieldFactories[facadeType];
     if (!createFields) {
         throw new Error(`Failed creating entry facade: No factory found for type "${facadeType}"`);

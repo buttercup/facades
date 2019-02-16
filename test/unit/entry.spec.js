@@ -21,6 +21,12 @@ describe("entry", function() {
             expect(type2).to.equal("website");
         });
 
+        it("supports overriding the entry type", function() {
+            this.entry.setAttribute(Entry.Attributes.FacadeType, "website");
+            const { type } = createEntryFacade(this.entry, { type: "login" });
+            expect(type).to.equal("login");
+        });
+
         it("throws if the parameter is not an Entry instance", function() {
             expect(() => {
                 createEntryFacade(new Archive());
