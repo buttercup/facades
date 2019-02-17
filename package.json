@@ -6,7 +6,6 @@
   "scripts": {
     "docs": "jsdoc2md './source/**/*.js' > API.md",
     "format": "prettier --write '{source,test}/**/*.js'",
-    "precommit": "lint-staged",
     "test": "run-s test:all test:format",
     "test:all": "nyc mocha -r test/index.js 'test/**/*.spec.js'",
     "test:format": "prettier-check '{source,test}/**/*.js'",
@@ -52,5 +51,10 @@
     "prettier": "^1.16.4",
     "prettier-check": "^2.0.0",
     "sinon": "^7.2.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
