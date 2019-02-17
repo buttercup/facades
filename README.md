@@ -38,5 +38,22 @@ consumeArchiveFacade(archive, facade);
 
 You can read about the various facade properties in the [API documentation](API.md).
 
+### Creating new objects
+The `createEntryFacade` function normally takes an `Entry` instance, but can be used without one to create a _new_ entry. Once created make sure to set `parentID` to the ID of the parent group. You can override the facade type of new entries by specifying it upon creation: `createEntryFacade(null, { type: "website" })`.
+
+You can create new groups by using `createGroupFacade` - passing no group to this method creates a new group facade. You can specify the parent group's ID (defaults to root) as the second parameter to the method. Make sure to set the `title` property before writing it back.
+
+You can add new properties to entries by using the `createFieldDescriptor` method:
+
+```javascript
+const entryFacade = createEntryFacade(entry);
+const field = createFieldDescriptor(entry, "myProp", "property", "myProp");
+field.value = "some new value";
+entryFacade.fields.push(field);
+consumeEntryFacade(entry, entryFacade);
+```
+
+`createFieldDescriptor` has the following signature: `createFieldDescriptor(entry, title, fieldType, propertyName)`.
+
 ### Important notes regarding usage
 Facade consumption is inherently destructive, so be sure that when consuming facades you're applying the correct facade instance to the original class instance. Applying the wrong facade could potentially end up deleting all items (groups and entries) from the original archive instance.
