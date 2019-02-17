@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v0.5.0
+_2019-02-17_
+
+ * Update all dependencies
+
 ## v0.4.1
 _2019-02-16_
 
