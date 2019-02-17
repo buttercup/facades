@@ -8,19 +8,6 @@
 ## Functions
 
 <dl>
-<dt><a href="#consumeArchiveFacade">consumeArchiveFacade(archive, facade)</a></dt>
-<dd><p>Consume an archive facade and apply the differences to the archive
-instance</p>
-</dd>
-<dt><a href="#consumeGroupFacade">consumeGroupFacade(group, facade)</a></dt>
-<dd><p>Consume a group facade and apply the differences to a group instance</p>
-</dd>
-<dt><a href="#createArchiveFacade">createArchiveFacade(archive)</a> ⇒ <code><a href="#ArchiveFacade">ArchiveFacade</a></code></dt>
-<dd><p>Create an archive facade from an Archive instance</p>
-</dd>
-<dt><a href="#createGroupFacade">createGroupFacade(group, [parentID])</a></dt>
-<dd><p>Create a group facade from a Group instance</p>
-</dd>
 <dt><a href="#getEntriesFacades">getEntriesFacades(entryCollection, groupID)</a> ⇒ <code><a href="#EntryFacade">Array.&lt;EntryFacade&gt;</a></code></dt>
 <dd><p>Convert an array of entries into an array of facades</p>
 </dd>
@@ -37,20 +24,8 @@ they can be edited as well.</p>
 <dd><p>Apply a facade field descriptor to an entry
 Takes data from the descriptor and writes it to the entry.</p>
 </dd>
-<dt><a href="#consumeEntryFacade">consumeEntryFacade(entry, facade)</a></dt>
-<dd><p>Process a modified entry facade</p>
-</dd>
-<dt><a href="#createEntryFacade">createEntryFacade([entry], [ops])</a> ⇒ <code><a href="#EntryFacade">EntryFacade</a></code></dt>
-<dd><p>Create a data/input facade for an Entry instance</p>
-</dd>
-<dt><a href="#getEntryFacadeType">getEntryFacadeType(entry)</a> ⇒ <code>String</code></dt>
-<dd><p>Get the facade type for an entry</p>
-</dd>
 <dt><a href="#setEntryValue">setEntryValue(entry, property, name, value)</a></dt>
 <dd><p>Set a value on an entry</p>
-</dd>
-<dt><a href="#createFieldDescriptor">createFieldDescriptor(entry, title, entryPropertyType, entryPropertyName, options)</a> ⇒ <code><a href="#EntryFacadeField">EntryFacadeField</a></code></dt>
-<dd><p>Create a descriptor for a field to be used within a facade</p>
 </dd>
 <dt><del><a href="#getEntryValue">getEntryValue(entry, field, name)</a> ⇒ <code>String</code></del></dt>
 <dd><p>Get a value on an entry for a specific property type</p>
@@ -69,6 +44,10 @@ Takes data from the descriptor and writes it to the entry.</p>
 </dd>
 <dt><a href="#CreateEntryFacadeOptions">CreateEntryFacadeOptions</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#EntryFacadeFieldFormattingSegment">EntryFacadeFieldFormattingSegment</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#EntryFacadeFieldFormatting">EntryFacadeFieldFormatting</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#EntryFacadeField">EntryFacadeField</a> : <code>Object</code></dt>
 <dd><p>Entry facade data field</p>
 </dd>
@@ -77,54 +56,118 @@ Takes data from the descriptor and writes it to the entry.</p>
 <a name="module_ButtercupFacades"></a>
 
 ## ButtercupFacades
-<a name="consumeArchiveFacade"></a>
 
-## consumeArchiveFacade(archive, facade)
+* [ButtercupFacades](#module_ButtercupFacades)
+    * [.consumeArchiveFacade(archive, facade)](#module_ButtercupFacades.consumeArchiveFacade)
+    * [.consumeGroupFacade(group, facade)](#module_ButtercupFacades.consumeGroupFacade)
+    * [.createArchiveFacade(archive)](#module_ButtercupFacades.createArchiveFacade) ⇒ [<code>ArchiveFacade</code>](#ArchiveFacade)
+    * [.createGroupFacade(group, [parentID])](#module_ButtercupFacades.createGroupFacade)
+    * [.consumeEntryFacade(entry, facade)](#module_ButtercupFacades.consumeEntryFacade)
+    * [.createEntryFacade([entry], [ops])](#module_ButtercupFacades.createEntryFacade) ⇒ [<code>EntryFacade</code>](#EntryFacade)
+    * [.getEntryFacadeType(entry)](#module_ButtercupFacades.getEntryFacadeType) ⇒ <code>String</code>
+    * [.createFieldDescriptor(entry, title, entryPropertyType, entryPropertyName, options)](#module_ButtercupFacades.createFieldDescriptor) ⇒ [<code>EntryFacadeField</code>](#EntryFacadeField)
+
+<a name="module_ButtercupFacades.consumeArchiveFacade"></a>
+
+### ButtercupFacades.consumeArchiveFacade(archive, facade)
 Consume an archive facade and apply the differences to the archive
 instance
 
-**Kind**: global function  
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | archive | <code>Archive</code> | The archive instance to apply to |
 | facade | [<code>ArchiveFacade</code>](#ArchiveFacade) | The facade to apply |
 
-<a name="consumeGroupFacade"></a>
+<a name="module_ButtercupFacades.consumeGroupFacade"></a>
 
-## consumeGroupFacade(group, facade)
+### ButtercupFacades.consumeGroupFacade(group, facade)
 Consume a group facade and apply the differences to a group instance
 
-**Kind**: global function  
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | group | <code>Group</code> | The group instance to apply to |
 | facade | [<code>GroupFacade</code>](#GroupFacade) | The facade to apply |
 
-<a name="createArchiveFacade"></a>
+<a name="module_ButtercupFacades.createArchiveFacade"></a>
 
-## createArchiveFacade(archive) ⇒ [<code>ArchiveFacade</code>](#ArchiveFacade)
+### ButtercupFacades.createArchiveFacade(archive) ⇒ [<code>ArchiveFacade</code>](#ArchiveFacade)
 Create an archive facade from an Archive instance
 
-**Kind**: global function  
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
 **Returns**: [<code>ArchiveFacade</code>](#ArchiveFacade) - An archive facade  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | archive | <code>Archive</code> | An archive instance |
 
-<a name="createGroupFacade"></a>
+<a name="module_ButtercupFacades.createGroupFacade"></a>
 
-## createGroupFacade(group, [parentID])
+### ButtercupFacades.createGroupFacade(group, [parentID])
 Create a group facade from a Group instance
 
-**Kind**: global function  
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | group | <code>Group</code> |  | The group instance |
 | [parentID] | <code>String</code> | <code>0</code> | The parent ID of the group |
+
+<a name="module_ButtercupFacades.consumeEntryFacade"></a>
+
+### ButtercupFacades.consumeEntryFacade(entry, facade)
+Process a modified entry facade
+
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| entry | <code>Entry</code> | The entry to apply processed data on |
+| facade | [<code>EntryFacade</code>](#EntryFacade) | The facade object |
+
+<a name="module_ButtercupFacades.createEntryFacade"></a>
+
+### ButtercupFacades.createEntryFacade([entry], [ops]) ⇒ [<code>EntryFacade</code>](#EntryFacade)
+Create a data/input facade for an Entry instance
+
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+**Returns**: [<code>EntryFacade</code>](#EntryFacade) - A newly created facade  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| [entry] | <code>Entry</code> | The Entry instance |
+| [ops] | [<code>CreateEntryFacadeOptions</code>](#CreateEntryFacadeOptions) | Options for the entry facade creation |
+
+<a name="module_ButtercupFacades.getEntryFacadeType"></a>
+
+### ButtercupFacades.getEntryFacadeType(entry) ⇒ <code>String</code>
+Get the facade type for an entry
+
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+**Returns**: <code>String</code> - The facade type  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| entry | <code>Entry</code> | The entry instance |
+
+<a name="module_ButtercupFacades.createFieldDescriptor"></a>
+
+### ButtercupFacades.createFieldDescriptor(entry, title, entryPropertyType, entryPropertyName, options) ⇒ [<code>EntryFacadeField</code>](#EntryFacadeField)
+Create a descriptor for a field to be used within a facade
+
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+**Returns**: [<code>EntryFacadeField</code>](#EntryFacadeField) - The field descriptor  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| entry | <code>Entry</code> \| <code>null</code> | The entry instance to process or null if the initial value  should be empty |
+| title | <code>String</code> | The field title |
+| entryPropertyType | <code>String</code> | The type of entry property (property/attribute) |
+| entryPropertyName | <code>String</code> | The name of the property |
+| options | <code>Object</code> | The options for the field |
 
 <a name="getEntriesFacades"></a>
 
@@ -181,43 +224,6 @@ Takes data from the descriptor and writes it to the entry.
 | entry | <code>Entry</code> | The entry to apply to |
 | descriptor | [<code>EntryFacadeField</code>](#EntryFacadeField) | The descriptor object |
 
-<a name="consumeEntryFacade"></a>
-
-## consumeEntryFacade(entry, facade)
-Process a modified entry facade
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| entry | <code>Entry</code> | The entry to apply processed data on |
-| facade | [<code>EntryFacade</code>](#EntryFacade) | The facade object |
-
-<a name="createEntryFacade"></a>
-
-## createEntryFacade([entry], [ops]) ⇒ [<code>EntryFacade</code>](#EntryFacade)
-Create a data/input facade for an Entry instance
-
-**Kind**: global function  
-**Returns**: [<code>EntryFacade</code>](#EntryFacade) - A newly created facade  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| [entry] | <code>Entry</code> | The Entry instance |
-| [ops] | [<code>CreateEntryFacadeOptions</code>](#CreateEntryFacadeOptions) | Options for the entry facade creation |
-
-<a name="getEntryFacadeType"></a>
-
-## getEntryFacadeType(entry) ⇒ <code>String</code>
-Get the facade type for an entry
-
-**Kind**: global function  
-**Returns**: <code>String</code> - The facade type  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| entry | <code>Entry</code> | The entry instance |
-
 <a name="setEntryValue"></a>
 
 ## setEntryValue(entry, property, name, value)
@@ -235,22 +241,6 @@ Set a value on an entry
 | property | <code>String</code> | Type of property ("property"/"meta"/"attribute") |
 | name | <code>String</code> | The property name |
 | value | <code>String</code> | The value to set |
-
-<a name="createFieldDescriptor"></a>
-
-## createFieldDescriptor(entry, title, entryPropertyType, entryPropertyName, options) ⇒ [<code>EntryFacadeField</code>](#EntryFacadeField)
-Create a descriptor for a field to be used within a facade
-
-**Kind**: global function  
-**Returns**: [<code>EntryFacadeField</code>](#EntryFacadeField) - The field descriptor  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| entry | <code>Entry</code> \| <code>null</code> | The entry instance to process or null if the initial value  should be empty |
-| title | <code>String</code> | The field title |
-| entryPropertyType | <code>String</code> | The type of entry property (property/attribute) |
-| entryPropertyName | <code>String</code> | The name of the property |
-| options | <code>Object</code> | The options for the field |
 
 <a name="getEntryValue"></a>
 
@@ -325,6 +315,31 @@ Entry facade for data input
 | --- | --- | --- |
 | [type] | <code>String</code> | Optionally override the created facade type |
 
+<a name="EntryFacadeFieldFormattingSegment"></a>
+
+## EntryFacadeFieldFormattingSegment : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [char] | <code>RegExp</code> | A character to match with a regular expression |
+| [repeat] | <code>Number</code> | Number of times to repeat the character match (required for `char`) |
+| [exactly] | <code>String</code> | The exact character match (operates in opposition to `char`) |
+
+<a name="EntryFacadeFieldFormatting"></a>
+
+## EntryFacadeFieldFormatting : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| [format] | [<code>Array.&lt;EntryFacadeFieldFormattingSegment&gt;</code>](#EntryFacadeFieldFormattingSegment) | The segmented formatting of the value |
+| [placeholder] | <code>String</code> | Optional placeholder for the input (ties in to `format`) |
+| options | <code>Object</code> \| <code>Array</code> | Options for a dropdown: either an array of option values or an object  (key:value) of values and titles |
+| [defaultOption] | <code>String</code> | The default option value if none set |
+
 <a name="EntryFacadeField"></a>
 
 ## EntryFacadeField : <code>Object</code>
@@ -341,6 +356,6 @@ Entry facade data field
 | value | <code>String</code> | The value of the property (read/write) |
 | secret | <code>Boolean</code> | Wether or not the value should be hidden while viewing (masked) |
 | multiline | <code>Boolean</code> | Whether the value should be edited as a multiline value or not |
-| formatting | <code>Object</code> \| <code>Boolean</code> | Vendor formatting options object, or false if no formatting necessary |
+| formatting | [<code>EntryFacadeFieldFormatting</code>](#EntryFacadeFieldFormatting) \| <code>Boolean</code> | Vendor formatting options object, or false if no formatting necessary |
 | maxLength | <code>Number</code> | Maximum recommended length of the value (defaults to -1) |
 

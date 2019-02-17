@@ -15,8 +15,9 @@ const {
 } = require("./symbols.js");
 
 /**
- * @exports ButtercupFacades
+ * @module ButtercupFacades
  */
+
 module.exports = {
     ENTRY_TYPE_CREDITCARD,
     ENTRY_TYPE_LOGIN,

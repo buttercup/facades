@@ -1,4 +1,20 @@
 /**
+ * @typedef {Object} EntryFacadeFieldFormattingSegment
+ * @property {RegExp=} char - A character to match with a regular expression
+ * @property {Number=} repeat - Number of times to repeat the character match (required for `char`)
+ * @property {String=} exactly - The exact character match (operates in opposition to `char`)
+ */
+
+/**
+ * @typedef {Object} EntryFacadeFieldFormatting
+ * @property {Array.<EntryFacadeFieldFormattingSegment>=} format - The segmented formatting of the value
+ * @property {String=} placeholder - Optional placeholder for the input (ties in to `format`)
+ * @property {Object|Array=} options - Options for a dropdown: either an array of option values or an object
+ *  (key:value) of values and titles
+ * @property {String=} defaultOption - The default option value if none set
+ */
+
+/**
  * Entry facade data field
  * @typedef {Object} EntryFacadeField
  * @property {String} title - The user-friendly title of the field
@@ -7,7 +23,7 @@
  * @property {String} value - The value of the property (read/write)
  * @property {Boolean} secret - Wether or not the value should be hidden while viewing (masked)
  * @property {Boolean} multiline - Whether the value should be edited as a multiline value or not
- * @property {Object|Boolean} formatting - Vendor formatting options object, or false if no formatting necessary
+ * @property {EntryFacadeFieldFormatting|Boolean} formatting - Vendor formatting options object, or false if no formatting necessary
  * @property {Number} maxLength - Maximum recommended length of the value (defaults to -1)
  */
 
@@ -20,6 +36,7 @@
  * @param {String} entryPropertyName The name of the property
  * @param {Object} options The options for the field
  * @returns {EntryFacadeField} The field descriptor
+ * @memberof module:ButtercupFacades
  */
 function createFieldDescriptor(
     entry,

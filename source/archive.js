@@ -5,6 +5,7 @@ const { consumeEntryFacade, createEntryFacade } = require("./entry.js");
  * instance
  * @param {Archive} archive The archive instance to apply to
  * @param {ArchiveFacade} facade The facade to apply
+ * @memberof module:ButtercupFacades
  */
 function consumeArchiveFacade(archive, facade) {
     if (!archive || (archive && archive.type !== "Archive")) {
@@ -136,6 +137,7 @@ function consumeArchiveFacade(archive, facade) {
  * Consume a group facade and apply the differences to a group instance
  * @param {Group} group The group instance to apply to
  * @param {GroupFacade} facade The facade to apply
+ * @memberof module:ButtercupFacades
  */
 function consumeGroupFacade(group, facade) {
     const { id, title, type, attributes } = facade;
@@ -185,6 +187,7 @@ function consumeGroupFacade(group, facade) {
  * Create an archive facade from an Archive instance
  * @param {Archive} archive An archive instance
  * @returns {ArchiveFacade} An archive facade
+ * @memberof module:ButtercupFacades
  */
 function createArchiveFacade(archive) {
     const entries = archive
@@ -214,6 +217,7 @@ function createArchiveFacade(archive) {
  * Create a group facade from a Group instance
  * @param {Group} group The group instance
  * @param {String=} parentID The parent ID of the group
+ * @memberof module:ButtercupFacades
  */
 function createGroupFacade(group, parentID = "0") {
     return {
