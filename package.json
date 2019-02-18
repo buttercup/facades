@@ -56,5 +56,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "uuid": "^3.3.2"
   }
 }

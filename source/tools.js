@@ -1,3 +1,5 @@
+const uuid = require("uuid/v4");
+
 /**
  * @typedef {Object} EntryFacadeFieldFormattingSegment
  * @property {RegExp=} char - A character to match with a regular expression
@@ -17,6 +19,7 @@
 /**
  * Entry facade data field
  * @typedef {Object} EntryFacadeField
+ * @property {String} id - A randomly generated ID (UUID) for identifying this field during editing
  * @property {String} title - The user-friendly title of the field
  * @property {String} field - The type of data to map back to on the Entry instance (property/attribute)
  * @property {String} property - The property name within the field type of the Entry instance
@@ -47,6 +50,7 @@ function createFieldDescriptor(
 ) {
     const value = entry ? getEntryValue(entry, entryPropertyType, entryPropertyName) : "";
     return {
+        id: uuid(),
         title,
         field: entryPropertyType,
         property: entryPropertyName,
