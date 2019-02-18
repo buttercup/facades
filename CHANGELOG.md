@@ -1,5 +1,11 @@
 # Buttercup Facades Changelog
 
+## v0.7.0
+_2019-02-18_
+
+ * Added `id` property to field descriptors (UUID)
+   * Added `uuid` dependency
+
 ## v0.6.0
 _2019-02-18_
 
