@@ -22,7 +22,7 @@ function addExtraFieldsNonDestructive(entry, fields) {
             .map(name =>
                 createFieldDescriptor(
                     entry, // Entry instance
-                    name, // Title
+                    "", // Title
                     "property", // Type
                     name, // Property name
                     { removeable: true }
@@ -33,7 +33,7 @@ function addExtraFieldsNonDestructive(entry, fields) {
             .map(name =>
                 createFieldDescriptor(
                     entry, // Entry instance
-                    name, // Title
+                    "", // Title
                     "attribute", // Type
                     name // Property name
                 )
