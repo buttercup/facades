@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v0.6.0
+_2019-02-18_
+
+ * Set title to an empty string for custom fields
+
 ## v0.5.0
 _2019-02-17_
 
