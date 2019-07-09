@@ -1,5 +1,12 @@
 # Buttercup Facades Changelog
 
+## v0.8.0
+_2019-07-09_
+
+ * `Special` property for OTP handling
+ * `propertyType` to replace `field`
+ * **Deprecation**: Facade field property `field` deprecated in favour of `propertyType`
+
 ## v0.7.0
 _2019-02-18_
 

@@ -350,12 +350,14 @@ Entry facade data field
 
 | Name | Type | Description |
 | --- | --- | --- |
+| id | <code>String</code> | A randomly generated ID (UUID) for identifying this field during editing |
 | title | <code>String</code> | The user-friendly title of the field |
-| field | <code>String</code> | The type of data to map back to on the Entry instance (property/attribute) |
+| field | <code>String</code> | See `propertyType`- field is deprecated |
+| propertyType | <code>String</code> | The type of data to map back to on the Entry instance (property/attribute) |
 | property | <code>String</code> | The property name within the field type of the Entry instance |
 | value | <code>String</code> | The value of the property (read/write) |
 | secret | <code>Boolean</code> | Wether or not the value should be hidden while viewing (masked) |
 | multiline | <code>Boolean</code> | Whether the value should be edited as a multiline value or not |
 | formatting | [<code>EntryFacadeFieldFormatting</code>](#EntryFacadeFieldFormatting) \| <code>Boolean</code> | Vendor formatting options object, or false if no formatting necessary |
-| maxLength | <code>Number</code> | Maximum recommended length of the value (defaults to -1) |
+| special | <code>null</code> \| <code>String</code> | Special display handling (internal) |
 
