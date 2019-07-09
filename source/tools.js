@@ -1,4 +1,5 @@
 const uuid = require("uuid/v4");
+const { ENTRY_PROPERTY_OTP } = require("./symbols.js");
 
 /**
  * @typedef {Object} EntryFacadeFieldFormattingSegment
@@ -21,13 +22,14 @@ const uuid = require("uuid/v4");
  * @typedef {Object} EntryFacadeField
  * @property {String} id - A randomly generated ID (UUID) for identifying this field during editing
  * @property {String} title - The user-friendly title of the field
- * @property {String} field - The type of data to map back to on the Entry instance (property/attribute)
+ * @property {String} field - See `propertyType`- field is deprecated
+ * @property {String} propertyType - The type of data to map back to on the Entry instance (property/attribute)
  * @property {String} property - The property name within the field type of the Entry instance
  * @property {String} value - The value of the property (read/write)
  * @property {Boolean} secret - Wether or not the value should be hidden while viewing (masked)
  * @property {Boolean} multiline - Whether the value should be edited as a multiline value or not
  * @property {EntryFacadeFieldFormatting|Boolean} formatting - Vendor formatting options object, or false if no formatting necessary
- * @property {Number} maxLength - Maximum recommended length of the value (defaults to -1)
+ * @property {null|String} special - Special display handling (internal)
  */
 
 /**
@@ -49,16 +51,25 @@ function createFieldDescriptor(
     { multiline = false, secret = false, formatting = false, removeable = false } = {}
 ) {
     const value = entry ? getEntryValue(entry, entryPropertyType, entryPropertyName) : "";
+    // Check special config
+    const otpProp = entry ? entry.getAttribute(ENTRY_PROPERTY_OTP) : null;
+    let special = null;
+    if (entryPropertyType === "property" && otpProp === entryPropertyName) {
+        special = "otp";
+    }
+    // Return descriptor
     return {
         id: uuid(),
         title,
         field: entryPropertyType,
+        propertyType: entryPropertyType,
         property: entryPropertyName,
         value,
         secret,
         multiline,
         formatting,
-        removeable
+        removeable,
+        special
     };
 }
 

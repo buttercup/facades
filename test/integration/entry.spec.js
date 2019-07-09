@@ -26,4 +26,25 @@ describe("entry", function() {
             expect(this.entry.getAttribute("BC_TEST")).to.equal("test2");
         });
     });
+
+    describe("createEntryFacade", function() {
+        beforeEach(function() {
+            const archive = new Archive();
+            this.entry = archive.createGroup("test").createEntry("test");
+            this.entry
+                .setProperty(
+                    "otpuri",
+                    "otpauth://totp/ACME:AzureDiamond?issuer=ACME&secret=NB2W45DFOIZA&algorithm=SHA1&digits=6&period=30"
+                )
+                .setProperty("username", "test")
+                .setProperty("password", "test")
+                .setAttribute(Entry.Attributes.TOTPProperty, "otpuri");
+            this.facade = createEntryFacade(this.entry);
+        });
+
+        it("correctly marks special for OTP", function() {
+            const otpField = this.facade.fields.find(f => f.property === "otpuri");
+            expect(otpField).to.have.property("special", "otp");
+        });
+    });
 });

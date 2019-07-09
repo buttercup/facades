@@ -15,9 +15,7 @@ function consumeArchiveFacade(archive, facade) {
     }
     if (!facade || (facade && facade.type !== "archive")) {
         throw new Error(
-            `Failed consuming archive facade: Second parameter expected to be an archive facade, got: ${
-                facade.type
-            }`
+            `Failed consuming archive facade: Second parameter expected to be an archive facade, got: ${facade.type}`
         );
     }
     const { id, type, attributes, groups, entries } = facade;
@@ -26,9 +24,7 @@ function consumeArchiveFacade(archive, facade) {
     }
     if (id !== archive.id) {
         throw new Error(
-            `Failed consuming archive facade: Provided facade ID (${id}) does not match target archive's ID: ${
-                archive.id
-            }`
+            `Failed consuming archive facade: Provided facade ID (${id}) does not match target archive's ID: ${archive.id}`
         );
     }
     // Create comparison facade
@@ -148,9 +144,7 @@ function consumeGroupFacade(group, facade) {
     }
     if (id !== group.id) {
         throw new Error(
-            `Failed consuming group facade: Provided facade ID (${id}) does not match target group's ID: ${
-                group.id
-            }`
+            `Failed consuming group facade: Provided facade ID (${id}) does not match target group's ID: ${group.id}`
         );
     }
     if (!title || title.trim().length <= 0) {

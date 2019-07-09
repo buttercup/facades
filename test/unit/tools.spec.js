@@ -14,7 +14,7 @@ describe("tools", function() {
             const obj = createFieldDescriptor(null, "Test", "property", "test");
             expect(obj).to.be.an("object");
             expect(obj).to.have.property("title", "Test");
-            expect(obj).to.have.property("field", "property");
+            expect(obj).to.have.property("propertyType", "property");
             expect(obj).to.have.property("property", "test");
             expect(obj).to.have.property("value", "");
         });
@@ -22,7 +22,7 @@ describe("tools", function() {
         it("supports taking the value from an Entry", function() {
             const obj = createFieldDescriptor(this.entry, "Username", "property", "username");
             expect(obj).to.have.property("title", "Username");
-            expect(obj).to.have.property("field", "property");
+            expect(obj).to.have.property("propertyType", "property");
             expect(obj).to.have.property("property", "username");
             expect(obj).to.have.property("value", "user@email.com");
         });
