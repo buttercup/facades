@@ -83,7 +83,8 @@ function consumeEntryFacade(entry, facade) {
         // remove missing properties
         Object.keys(properties).forEach(propKey => {
             const correspondingField = facade.fields.find(
-                ({ field, property }) => field === "property" && property === propKey
+                ({ field, propertyType, property }) =>
+                    (field === "property" || propertyType === "property") && property === propKey
             );
             if (typeof correspondingField === "undefined") {
                 entry.deleteProperty(propKey);
@@ -92,7 +93,8 @@ function consumeEntryFacade(entry, facade) {
         // remove missing attributes
         Object.keys(attributes).forEach(attrKey => {
             const correspondingField = facade.fields.find(
-                ({ field, property }) => field === "attribute" && property === attrKey
+                ({ field, propertyType, property }) =>
+                    (field === "attribute" || propertyType === "attribute") && property === attrKey
             );
             if (typeof correspondingField === "undefined") {
                 entry.deleteAttribute(attrKey);
