@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/buttercup/facades#readme",
   "peerDependencies": {
-    "buttercup": ">= 2"
+    "buttercup": ">= 2.13.0"
   },
   "devDependencies": {
     "buttercup": "^2.13.0",
