@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v0.8.1
+_2019-07-11_
+
+ * No attribute needed for OTP URI detection
+
 ## v0.8.0
 _2019-07-09_
 
