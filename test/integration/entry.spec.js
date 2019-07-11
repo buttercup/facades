@@ -37,8 +37,7 @@ describe("entry", function() {
                     "otpauth://totp/ACME:AzureDiamond?issuer=ACME&secret=NB2W45DFOIZA&algorithm=SHA1&digits=6&period=30"
                 )
                 .setProperty("username", "test")
-                .setProperty("password", "test")
-                .setAttribute(Entry.Attributes.TOTPProperty, "otpuri");
+                .setProperty("password", "test");
             this.facade = createEntryFacade(this.entry);
         });
 

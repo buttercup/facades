@@ -1,5 +1,5 @@
 const uuid = require("uuid/v4");
-const { ENTRY_PROPERTY_OTP } = require("./symbols.js");
+const { isOTPURI } = require("./detection.js");
 
 /**
  * @typedef {Object} EntryFacadeFieldFormattingSegment
@@ -52,9 +52,8 @@ function createFieldDescriptor(
 ) {
     const value = entry ? getEntryValue(entry, entryPropertyType, entryPropertyName) : "";
     // Check special config
-    const otpProp = entry ? entry.getAttribute(ENTRY_PROPERTY_OTP) : null;
     let special = null;
-    if (entryPropertyType === "property" && otpProp === entryPropertyName) {
+    if (entryPropertyType === "property" && isOTPURI(value)) {
         special = "otp";
     }
     // Return descriptor
