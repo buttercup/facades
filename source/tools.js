@@ -1,5 +1,12 @@
 const uuid = require("uuid/v4");
+const { Entry } = require("buttercup");
 const { isOTPURI } = require("./detection.js");
+const {
+    FIELD_VALUE_TYPE_NOTE,
+    FIELD_VALUE_TYPE_OTP,
+    FIELD_VALUE_TYPE_PASSWORD,
+    FIELD_VALUE_TYPE_TEXT
+} = require("./symbols.js");
 
 /**
  * @typedef {Object} EntryFacadeFieldFormattingSegment
@@ -60,36 +67,50 @@ function createFieldDescriptor(
     return {
         id: uuid(),
         title,
-        field: entryPropertyType,
         propertyType: entryPropertyType,
         property: entryPropertyName,
         value,
-        secret,
-        multiline,
+        valueType: getEntryValueType(entry, entryPropertyName),
         formatting,
-        removeable,
-        special
+        removeable
     };
 }
 
 /**
  * Get a value on an entry for a specific property type
  * @param {Entry} entry The entry instance
- * @param {String} field The type of entry property (property/attribute)
+ * @param {String} propertyType The type of entry property (property/attribute)
  * @param {String} name The property name
  * @returns {String} The property value
  * @throws {Error} Throws for unknown property types
  * @deprecated Not in use - To be removed
  */
-function getEntryValue(entry, field, name) {
-    switch (field) {
+function getEntryValue(entry, propertyType, name) {
+    switch (propertyType) {
         case "property":
             return entry.getProperty(name);
         case "attribute":
             return entry.getAttribute(name);
         default:
-            throw new Error(`Cannot retrieve value: Unknown property type: ${field}`);
+            throw new Error(`Cannot retrieve value: Unknown property type: ${propertyType}`);
     }
+}
+
+/**
+ * Get the entry value type
+ * @param {Entry} entry Entry instance
+ * @param {String} propertyName The entry property name
+ * @returns {String} The entry value type
+ */
+function getEntryValueType(entry, propertyName) {
+    const validTypes = [
+        FIELD_VALUE_TYPE_NOTE,
+        FIELD_VALUE_TYPE_OTP,
+        FIELD_VALUE_TYPE_PASSWORD,
+        FIELD_VALUE_TYPE_TEXT
+    ];
+    const type = entry.getAttribute(`${Entry.Attributes.FieldTypePrefix}${propertyName}`);
+    return validTypes.indexOf(type) >= 0 ? type : FIELD_VALUE_TYPE_TEXT;
 }
 
 module.exports = {
