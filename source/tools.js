@@ -65,11 +65,6 @@ function createFieldDescriptor(
     { multiline = false, secret = false, formatting = false, removeable = false } = {}
 ) {
     const value = entry ? getEntryValue(entry, entryPropertyType, entryPropertyName) : "";
-    // Check special config
-    let special = null;
-    if (entryPropertyType === "property" && isOTPURI(value)) {
-        special = "otp";
-    }
     // Return descriptor
     return {
         id: uuid(),
