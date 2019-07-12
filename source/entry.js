@@ -1,5 +1,5 @@
 const facadeFieldFactories = require("./entryFields.js");
-const { createFieldDescriptor } = require("./tools.js");
+const { createFieldDescriptor, getEntryValueType, setEntryValueType } = require("./tools.js");
 const { ENTRY_FACADE_TYPE_ATTRIBUTE } = require("./symbols.js");
 
 /**
@@ -57,7 +57,13 @@ function addExtraFieldsNonDestructive(entry, fields) {
  * @param {EntryFacadeField} descriptor The descriptor object
  */
 function applyFieldDescriptor(entry, descriptor) {
-    setEntryValue(entry, descriptor.field, descriptor.property, descriptor.value);
+    setEntryValue(
+        entry,
+        descriptor.propertyType,
+        descriptor.property,
+        descriptor.value,
+        descriptor.valueType
+    );
 }
 
 /**
@@ -152,16 +158,22 @@ function getEntryFacadeType(entry) {
  * @param {String} property Type of property ("property"/"meta"/"attribute")
  * @param {String} name The property name
  * @param {String} value The value to set
+ * @param {String=} valueType Value type to set
  * @throws {Error} Throws if the property type is not recognised
  */
-function setEntryValue(entry, property, name, value) {
+function setEntryValue(entry, property, name, value, valueType) {
     switch (property) {
         case "property":
-            return entry.setProperty(name, value);
+            entry.setProperty(name, value);
+            break;
         case "attribute":
-            return entry.setAttribute(name, value);
+            entry.setAttribute(name, value);
+            break;
         default:
             throw new Error(`Cannot set value: Unknown property type: ${property}`);
+    }
+    if (valueType && getEntryValueType(entry) !== valueType) {
+        setEntryValueType(entry, name, valueType);
     }
 }
 

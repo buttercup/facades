@@ -109,7 +109,19 @@ function getEntryValueType(entry, propertyName) {
     return VALID_VALUE_TYPES.indexOf(type) >= 0 ? type : FIELD_VALUE_TYPE_TEXT;
 }
 
+/**
+ * Set the value type attribute of an entry
+ * @param {Entry} entry Entry instance
+ * @param {String} propertyName The property name
+ * @param {String} valueType The value type
+ */
+function setEntryValueType(entry, propertyName, valueType) {
+    entry.setAttribute(`${Entry.Attributes.FieldTypePrefix}${propertyName}`, valueType);
+}
+
 module.exports = {
     createFieldDescriptor,
-    getEntryValue
+    getEntryValue,
+    getEntryValueType,
+    setEntryValueType
 };
