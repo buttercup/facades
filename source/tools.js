@@ -8,6 +8,13 @@ const {
     FIELD_VALUE_TYPE_TEXT
 } = require("./symbols.js");
 
+const VALID_VALUE_TYPES = [
+    FIELD_VALUE_TYPE_NOTE,
+    FIELD_VALUE_TYPE_OTP,
+    FIELD_VALUE_TYPE_PASSWORD,
+    FIELD_VALUE_TYPE_TEXT
+];
+
 /**
  * @typedef {Object} EntryFacadeFieldFormattingSegment
  * @property {RegExp=} char - A character to match with a regular expression
@@ -103,14 +110,8 @@ function getEntryValue(entry, propertyType, name) {
  * @returns {String} The entry value type
  */
 function getEntryValueType(entry, propertyName) {
-    const validTypes = [
-        FIELD_VALUE_TYPE_NOTE,
-        FIELD_VALUE_TYPE_OTP,
-        FIELD_VALUE_TYPE_PASSWORD,
-        FIELD_VALUE_TYPE_TEXT
-    ];
     const type = entry.getAttribute(`${Entry.Attributes.FieldTypePrefix}${propertyName}`);
-    return validTypes.indexOf(type) >= 0 ? type : FIELD_VALUE_TYPE_TEXT;
+    return VALID_VALUE_TYPES.indexOf(type) >= 0 ? type : FIELD_VALUE_TYPE_TEXT;
 }
 
 module.exports = {
