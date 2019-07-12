@@ -4,7 +4,9 @@ const {
     ENTRY_TYPE_LOGIN,
     ENTRY_TYPE_NOTE,
     ENTRY_TYPE_SSHKEY,
-    ENTRY_TYPE_WEBSITE
+    ENTRY_TYPE_WEBSITE,
+    FIELD_VALUE_TYPE_NOTE,
+    FIELD_VALUE_TYPE_PASSWORD
 } = require("./symbols.js");
 
 function createBaseFields(entry) {
@@ -46,7 +48,7 @@ function createCreditCardFields(entry) {
                 format: [{ char: /\d/, repeat: 4 }],
                 placeholder: "DDD or DDDD"
             },
-            secret: true
+            valueType: FIELD_VALUE_TYPE_PASSWORD
         }),
         createFieldDescriptor(entry, "Valid From", "property", "valid_from", {
             formatting: {
@@ -59,7 +61,7 @@ function createCreditCardFields(entry) {
                 ],
                 placeholder: "MM/YYYY"
             },
-            secret: true
+            valueType: FIELD_VALUE_TYPE_PASSWORD
         }),
         createFieldDescriptor(entry, "Expiry", "property", "expiry", {
             formatting: {
@@ -72,7 +74,7 @@ function createCreditCardFields(entry) {
                 ],
                 placeholder: "MM/YYYY"
             },
-            secret: true
+            valueType: FIELD_VALUE_TYPE_PASSWORD
         })
     ];
 }
@@ -81,14 +83,18 @@ function createLoginFields(entry) {
     return [
         ...createBaseFields(entry),
         createFieldDescriptor(entry, "Username", "property", "username"),
-        createFieldDescriptor(entry, "Password", "property", "password", { secret: true })
+        createFieldDescriptor(entry, "Password", "property", "password", {
+            valueType: FIELD_VALUE_TYPE_PASSWORD
+        })
     ];
 }
 
 function createNoteFields(entry) {
     return [
         ...createBaseFields(entry),
-        createFieldDescriptor(entry, "Note", "property", "note", { multiline: true })
+        createFieldDescriptor(entry, "Note", "property", "note", {
+            valueType: FIELD_VALUE_TYPE_NOTE
+        })
     ];
 }
 
@@ -96,7 +102,9 @@ function createSSHKeyFields(entry) {
     return [
         ...createBaseFields(entry),
         createFieldDescriptor(entry, "Public key", "property", "publicKey"),
-        createFieldDescriptor(entry, "Private key", "property", "privateKey", { multiline: true })
+        createFieldDescriptor(entry, "Private key", "property", "privateKey", {
+            valueType: FIELD_VALUE_TYPE_NOTE
+        })
     ];
 }
 
