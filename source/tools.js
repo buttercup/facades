@@ -40,10 +40,8 @@ const VALID_VALUE_TYPES = [
  * @property {String} propertyType - The type of data to map back to on the Entry instance (property/attribute)
  * @property {String} property - The property name within the field type of the Entry instance
  * @property {String} value - The value of the property (read/write)
- * @property {Boolean} secret - Wether or not the value should be hidden while viewing (masked)
- * @property {Boolean} multiline - Whether the value should be edited as a multiline value or not
+ * @property {String=} valueType - The type of value (rendering) (null for attributes)
  * @property {EntryFacadeFieldFormatting|Boolean} formatting - Vendor formatting options object, or false if no formatting necessary
- * @property {null|String} special - Special display handling (internal)
  */
 
 /**
@@ -72,7 +70,11 @@ function createFieldDescriptor(
         propertyType: entryPropertyType,
         property: entryPropertyName,
         value,
-        valueType: valueType ? valueType : getEntryValueType(entry, entryPropertyName),
+        valueType: valueType
+            ? valueType
+            : entryPropertyType === "attribute"
+            ? null
+            : getEntryValueType(entry, entryPropertyName),
         formatting,
         removeable
     };
@@ -100,11 +102,15 @@ function getEntryValue(entry, propertyType, name) {
 
 /**
  * Get the entry value type
- * @param {Entry} entry Entry instance
+ * @param {Entry|null} entry Entry instance
  * @param {String} propertyName The entry property name
- * @returns {String} The entry value type
+ * @returns {String} The entry value type (returns default "text"
+ *  if entry not specified)
  */
 function getEntryValueType(entry, propertyName) {
+    if (!entry) {
+        return FIELD_VALUE_TYPE_TEXT;
+    }
     const type = entry.getAttribute(`${Entry.Attributes.FieldTypePrefix}${propertyName}`);
     return VALID_VALUE_TYPES.indexOf(type) >= 0 ? type : FIELD_VALUE_TYPE_TEXT;
 }

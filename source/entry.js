@@ -13,7 +13,7 @@ const { ENTRY_FACADE_TYPE_ATTRIBUTE } = require("./symbols.js");
  */
 function addExtraFieldsNonDestructive(entry, fields) {
     const exists = (propName, fieldType) =>
-        fields.find(item => item.field === fieldType && item.property === propName);
+        fields.find(item => item.propertyType === fieldType && item.property === propName);
     const { properties = {}, attributes = {} } = entry.toObject();
     return [
         ...fields,
@@ -102,9 +102,9 @@ function consumeEntryFacade(entry, facade) {
                 entry.deleteAttribute(attrKey);
             }
         });
-    } else {
-        throw new Error("Failed consuming entry data: Invalid item passed as a facade");
+        return;
     }
+    throw new Error("Failed consuming entry data: Invalid item passed as a facade");
 }
 
 /**

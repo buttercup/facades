@@ -1,5 +1,6 @@
 const { Archive, Entry } = require("buttercup");
 const { consumeEntryFacade, createEntryFacade } = require("../../source/entry.js");
+const { FIELD_VALUE_TYPE_OTP } = require("../../source/symbols.js");
 
 describe("entry", function() {
     describe("consumeEntryFacade", function() {
@@ -36,14 +37,15 @@ describe("entry", function() {
                     "otpuri",
                     "otpauth://totp/ACME:AzureDiamond?issuer=ACME&secret=NB2W45DFOIZA&algorithm=SHA1&digits=6&period=30"
                 )
+                .setAttribute(`${Entry.Attributes.FieldTypePrefix}otpuri`, FIELD_VALUE_TYPE_OTP)
                 .setProperty("username", "test")
                 .setProperty("password", "test");
             this.facade = createEntryFacade(this.entry);
         });
 
-        it("correctly marks special for OTP", function() {
+        it("correctly sets valueType for OTP", function() {
             const otpField = this.facade.fields.find(f => f.property === "otpuri");
-            expect(otpField).to.have.property("special", "otp");
+            expect(otpField).to.have.property("valueType", FIELD_VALUE_TYPE_OTP);
         });
     });
 });
