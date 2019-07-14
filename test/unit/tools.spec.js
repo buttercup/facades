@@ -1,5 +1,6 @@
-const { Archive } = require("buttercup");
+const { Archive, Entry } = require("buttercup");
 const { createFieldDescriptor, getEntryValue } = require("../../source/tools.js");
+const { FIELD_VALUE_TYPE_NOTE, FIELD_VALUE_TYPE_TEXT } = require("../../source/symbols.js");
 
 describe("tools", function() {
     beforeEach(function() {
@@ -17,6 +18,7 @@ describe("tools", function() {
             expect(obj).to.have.property("propertyType", "property");
             expect(obj).to.have.property("property", "test");
             expect(obj).to.have.property("value", "");
+            expect(obj).to.have.property("valueType", FIELD_VALUE_TYPE_TEXT);
         });
 
         it("supports taking the value from an Entry", function() {
@@ -25,6 +27,15 @@ describe("tools", function() {
             expect(obj).to.have.property("propertyType", "property");
             expect(obj).to.have.property("property", "username");
             expect(obj).to.have.property("value", "user@email.com");
+        });
+
+        it("outputs valueType when set", function() {
+            this.entry.setAttribute(
+                `${Entry.Attributes.FieldTypePrefix}username`,
+                FIELD_VALUE_TYPE_NOTE
+            );
+            const obj = createFieldDescriptor(this.entry, "Username", "property", "username");
+            expect(obj).to.have.property("valueType", FIELD_VALUE_TYPE_NOTE);
         });
     });
 

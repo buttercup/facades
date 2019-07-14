@@ -1,5 +1,5 @@
 const facadeFieldFactories = require("./entryFields.js");
-const { createFieldDescriptor } = require("./tools.js");
+const { createFieldDescriptor, getEntryValueType, setEntryValueType } = require("./tools.js");
 const { ENTRY_FACADE_TYPE_ATTRIBUTE } = require("./symbols.js");
 
 /**
@@ -13,7 +13,7 @@ const { ENTRY_FACADE_TYPE_ATTRIBUTE } = require("./symbols.js");
  */
 function addExtraFieldsNonDestructive(entry, fields) {
     const exists = (propName, fieldType) =>
-        fields.find(item => item.field === fieldType && item.property === propName);
+        fields.find(item => item.propertyType === fieldType && item.property === propName);
     const { properties = {}, attributes = {} } = entry.toObject();
     return [
         ...fields,
@@ -57,7 +57,13 @@ function addExtraFieldsNonDestructive(entry, fields) {
  * @param {EntryFacadeField} descriptor The descriptor object
  */
 function applyFieldDescriptor(entry, descriptor) {
-    setEntryValue(entry, descriptor.field, descriptor.property, descriptor.value);
+    setEntryValue(
+        entry,
+        descriptor.propertyType,
+        descriptor.property,
+        descriptor.value,
+        descriptor.valueType
+    );
 }
 
 /**
@@ -81,8 +87,7 @@ function consumeEntryFacade(entry, facade) {
         // remove missing properties
         Object.keys(properties).forEach(propKey => {
             const correspondingField = facade.fields.find(
-                ({ field, propertyType, property }) =>
-                    (field === "property" || propertyType === "property") && property === propKey
+                ({ propertyType, property }) => propertyType === "property" && property === propKey
             );
             if (typeof correspondingField === "undefined") {
                 entry.deleteProperty(propKey);
@@ -91,16 +96,15 @@ function consumeEntryFacade(entry, facade) {
         // remove missing attributes
         Object.keys(attributes).forEach(attrKey => {
             const correspondingField = facade.fields.find(
-                ({ field, propertyType, property }) =>
-                    (field === "attribute" || propertyType === "attribute") && property === attrKey
+                ({ propertyType, property }) => propertyType === "attribute" && property === attrKey
             );
             if (typeof correspondingField === "undefined") {
                 entry.deleteAttribute(attrKey);
             }
         });
-    } else {
-        throw new Error("Failed consuming entry data: Invalid item passed as a facade");
+        return;
     }
+    throw new Error("Failed consuming entry data: Invalid item passed as a facade");
 }
 
 /**
@@ -154,16 +158,22 @@ function getEntryFacadeType(entry) {
  * @param {String} property Type of property ("property"/"meta"/"attribute")
  * @param {String} name The property name
  * @param {String} value The value to set
+ * @param {String=} valueType Value type to set
  * @throws {Error} Throws if the property type is not recognised
  */
-function setEntryValue(entry, property, name, value) {
+function setEntryValue(entry, property, name, value, valueType) {
     switch (property) {
         case "property":
-            return entry.setProperty(name, value);
+            entry.setProperty(name, value);
+            break;
         case "attribute":
-            return entry.setAttribute(name, value);
+            entry.setAttribute(name, value);
+            break;
         default:
             throw new Error(`Cannot set value: Unknown property type: ${property}`);
+    }
+    if (valueType && getEntryValueType(entry) !== valueType) {
+        setEntryValueType(entry, name, valueType);
     }
 }
 

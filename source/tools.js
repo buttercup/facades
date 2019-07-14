@@ -1,5 +1,19 @@
 const uuid = require("uuid/v4");
+const { Entry } = require("buttercup");
 const { isOTPURI } = require("./detection.js");
+const {
+    FIELD_VALUE_TYPE_NOTE,
+    FIELD_VALUE_TYPE_OTP,
+    FIELD_VALUE_TYPE_PASSWORD,
+    FIELD_VALUE_TYPE_TEXT
+} = require("./symbols.js");
+
+const VALID_VALUE_TYPES = [
+    FIELD_VALUE_TYPE_NOTE,
+    FIELD_VALUE_TYPE_OTP,
+    FIELD_VALUE_TYPE_PASSWORD,
+    FIELD_VALUE_TYPE_TEXT
+];
 
 /**
  * @typedef {Object} EntryFacadeFieldFormattingSegment
@@ -26,10 +40,8 @@ const { isOTPURI } = require("./detection.js");
  * @property {String} propertyType - The type of data to map back to on the Entry instance (property/attribute)
  * @property {String} property - The property name within the field type of the Entry instance
  * @property {String} value - The value of the property (read/write)
- * @property {Boolean} secret - Wether or not the value should be hidden while viewing (masked)
- * @property {Boolean} multiline - Whether the value should be edited as a multiline value or not
+ * @property {String=} valueType - The type of value (rendering) (null for attributes)
  * @property {EntryFacadeFieldFormatting|Boolean} formatting - Vendor formatting options object, or false if no formatting necessary
- * @property {null|String} special - Special display handling (internal)
  */
 
 /**
@@ -48,51 +60,74 @@ function createFieldDescriptor(
     title,
     entryPropertyType,
     entryPropertyName,
-    { multiline = false, secret = false, formatting = false, removeable = false } = {}
+    { formatting = false, removeable = false, valueType = null } = {}
 ) {
     const value = entry ? getEntryValue(entry, entryPropertyType, entryPropertyName) : "";
-    // Check special config
-    let special = null;
-    if (entryPropertyType === "property" && isOTPURI(value)) {
-        special = "otp";
-    }
     // Return descriptor
     return {
         id: uuid(),
         title,
-        field: entryPropertyType,
         propertyType: entryPropertyType,
         property: entryPropertyName,
         value,
-        secret,
-        multiline,
+        valueType: valueType
+            ? valueType
+            : entryPropertyType === "attribute"
+            ? null
+            : getEntryValueType(entry, entryPropertyName),
         formatting,
-        removeable,
-        special
+        removeable
     };
 }
 
 /**
  * Get a value on an entry for a specific property type
  * @param {Entry} entry The entry instance
- * @param {String} field The type of entry property (property/attribute)
+ * @param {String} propertyType The type of entry property (property/attribute)
  * @param {String} name The property name
  * @returns {String} The property value
  * @throws {Error} Throws for unknown property types
  * @deprecated Not in use - To be removed
  */
-function getEntryValue(entry, field, name) {
-    switch (field) {
+function getEntryValue(entry, propertyType, name) {
+    switch (propertyType) {
         case "property":
             return entry.getProperty(name);
         case "attribute":
             return entry.getAttribute(name);
         default:
-            throw new Error(`Cannot retrieve value: Unknown property type: ${field}`);
+            throw new Error(`Cannot retrieve value: Unknown property type: ${propertyType}`);
     }
+}
+
+/**
+ * Get the entry value type
+ * @param {Entry|null} entry Entry instance
+ * @param {String} propertyName The entry property name
+ * @returns {String} The entry value type (returns default "text"
+ *  if entry not specified)
+ */
+function getEntryValueType(entry, propertyName) {
+    if (!entry) {
+        return FIELD_VALUE_TYPE_TEXT;
+    }
+    const type = entry.getAttribute(`${Entry.Attributes.FieldTypePrefix}${propertyName}`);
+    return VALID_VALUE_TYPES.indexOf(type) >= 0 ? type : FIELD_VALUE_TYPE_TEXT;
+}
+
+/**
+ * Set the value type attribute of an entry
+ * @param {Entry} entry Entry instance
+ * @param {String} propertyName The property name
+ * @param {String} valueType The value type
+ */
+function setEntryValueType(entry, propertyName, valueType) {
+    entry.setAttribute(`${Entry.Attributes.FieldTypePrefix}${propertyName}`, valueType);
 }
 
 module.exports = {
     createFieldDescriptor,
-    getEntryValue
+    getEntryValue,
+    getEntryValueType,
+    setEntryValueType
 };

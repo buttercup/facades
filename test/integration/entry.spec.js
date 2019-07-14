@@ -1,5 +1,10 @@
 const { Archive, Entry } = require("buttercup");
 const { consumeEntryFacade, createEntryFacade } = require("../../source/entry.js");
+const {
+    FIELD_VALUE_TYPE_NOTE,
+    FIELD_VALUE_TYPE_OTP,
+    FIELD_VALUE_TYPE_TEXT
+} = require("../../source/symbols.js");
 
 describe("entry", function() {
     describe("consumeEntryFacade", function() {
@@ -10,6 +15,8 @@ describe("entry", function() {
                 .setProperty("username", "u12345")
                 .setProperty("password", "passw0rd")
                 .setProperty("URL", "https://bank.com")
+                .setProperty("Note", "test\nnote")
+                .setAttribute(`${Entry.Attributes.FieldTypePrefix}note`, FIELD_VALUE_TYPE_TEXT)
                 .setAttribute("BC_TEST", "test");
             this.facade = createEntryFacade(this.entry);
         });
@@ -25,6 +32,33 @@ describe("entry", function() {
             consumeEntryFacade(this.entry, this.facade);
             expect(this.entry.getAttribute("BC_TEST")).to.equal("test2");
         });
+
+        it("does not set valueType if set to default 'text'", function() {
+            this.facade.fields.find(
+                f => f.property === "username"
+            ).valueType = FIELD_VALUE_TYPE_TEXT;
+            consumeEntryFacade(this.entry, this.facade);
+            expect(this.entry.getAttribute(`${Entry.Attributes.FieldTypePrefix}username`)).to.be
+                .undefined;
+        });
+
+        it("sets a valueType if set for first time", function() {
+            this.facade.fields.find(
+                f => f.property === "username"
+            ).valueType = FIELD_VALUE_TYPE_OTP;
+            consumeEntryFacade(this.entry, this.facade);
+            expect(this.entry.getAttribute(`${Entry.Attributes.FieldTypePrefix}username`)).to.equal(
+                FIELD_VALUE_TYPE_OTP
+            );
+        });
+
+        it("sets valueType if changed", function() {
+            this.facade.fields.find(f => f.property === "Note").valueType = FIELD_VALUE_TYPE_NOTE;
+            consumeEntryFacade(this.entry, this.facade);
+            expect(this.entry.getAttribute(`${Entry.Attributes.FieldTypePrefix}Note`)).to.equal(
+                FIELD_VALUE_TYPE_NOTE
+            );
+        });
     });
 
     describe("createEntryFacade", function() {
@@ -36,14 +70,15 @@ describe("entry", function() {
                     "otpuri",
                     "otpauth://totp/ACME:AzureDiamond?issuer=ACME&secret=NB2W45DFOIZA&algorithm=SHA1&digits=6&period=30"
                 )
+                .setAttribute(`${Entry.Attributes.FieldTypePrefix}otpuri`, FIELD_VALUE_TYPE_OTP)
                 .setProperty("username", "test")
                 .setProperty("password", "test");
             this.facade = createEntryFacade(this.entry);
         });
 
-        it("correctly marks special for OTP", function() {
+        it("correctly sets valueType for OTP", function() {
             const otpField = this.facade.fields.find(f => f.property === "otpuri");
-            expect(otpField).to.have.property("special", "otp");
+            expect(otpField).to.have.property("valueType", FIELD_VALUE_TYPE_OTP);
         });
     });
 });

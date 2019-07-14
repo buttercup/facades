@@ -44,8 +44,9 @@ describe("entry", function() {
             const { fields } = createEntryFacade(this.entry);
             const attr = fields.find(field => field.property === "BC_TEST");
             expect(attr).to.be.an("object");
-            expect(attr).to.have.property("field", "attribute");
+            expect(attr).to.have.property("propertyType", "attribute");
             expect(attr).to.have.property("value", "test");
+            expect(attr).to.have.property("valueType", null);
         });
     });
 });
