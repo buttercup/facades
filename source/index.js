@@ -11,7 +11,11 @@ const {
     ENTRY_TYPE_LOGIN,
     ENTRY_TYPE_NOTE,
     ENTRY_TYPE_SSHKEY,
-    ENTRY_TYPE_WEBSITE
+    ENTRY_TYPE_WEBSITE,
+    FIELD_VALUE_TYPE_NOTE,
+    FIELD_VALUE_TYPE_OTP,
+    FIELD_VALUE_TYPE_PASSWORD,
+    FIELD_VALUE_TYPE_TEXT
 } = require("./symbols.js");
 
 /**
@@ -24,6 +28,10 @@ module.exports = {
     ENTRY_TYPE_NOTE,
     ENTRY_TYPE_SSHKEY,
     ENTRY_TYPE_WEBSITE,
+    FIELD_VALUE_TYPE_NOTE,
+    FIELD_VALUE_TYPE_OTP,
+    FIELD_VALUE_TYPE_PASSWORD,
+    FIELD_VALUE_TYPE_TEXT,
     consumeArchiveFacade,
     consumeGroupFacade,
     consumeEntryFacade,
