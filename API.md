@@ -24,11 +24,17 @@ they can be edited as well.</p>
 <dd><p>Apply a facade field descriptor to an entry
 Takes data from the descriptor and writes it to the entry.</p>
 </dd>
-<dt><a href="#setEntryValue">setEntryValue(entry, property, name, value)</a></dt>
+<dt><a href="#setEntryValue">setEntryValue(entry, property, name, value, [valueType])</a></dt>
 <dd><p>Set a value on an entry</p>
 </dd>
-<dt><del><a href="#getEntryValue">getEntryValue(entry, field, name)</a> ⇒ <code>String</code></del></dt>
+<dt><del><a href="#getEntryValue">getEntryValue(entry, propertyType, name)</a> ⇒ <code>String</code></del></dt>
 <dd><p>Get a value on an entry for a specific property type</p>
+</dd>
+<dt><a href="#getEntryValueType">getEntryValueType(entry, propertyName)</a> ⇒ <code>String</code></dt>
+<dd><p>Get the entry value type</p>
+</dd>
+<dt><a href="#setEntryValueType">setEntryValueType(entry, propertyName, valueType)</a></dt>
+<dd><p>Set the value type attribute of an entry</p>
 </dd>
 </dl>
 
@@ -226,7 +232,7 @@ Takes data from the descriptor and writes it to the entry.
 
 <a name="setEntryValue"></a>
 
-## setEntryValue(entry, property, name, value)
+## setEntryValue(entry, property, name, value, [valueType])
 Set a value on an entry
 
 **Kind**: global function  
@@ -241,10 +247,11 @@ Set a value on an entry
 | property | <code>String</code> | Type of property ("property"/"meta"/"attribute") |
 | name | <code>String</code> | The property name |
 | value | <code>String</code> | The value to set |
+| [valueType] | <code>String</code> | Value type to set |
 
 <a name="getEntryValue"></a>
 
-## ~~getEntryValue(entry, field, name) ⇒ <code>String</code>~~
+## ~~getEntryValue(entry, propertyType, name) ⇒ <code>String</code>~~
 ***Deprecated***
 
 Get a value on an entry for a specific property type
@@ -259,8 +266,35 @@ Get a value on an entry for a specific property type
 | Param | Type | Description |
 | --- | --- | --- |
 | entry | <code>Entry</code> | The entry instance |
-| field | <code>String</code> | The type of entry property (property/attribute) |
+| propertyType | <code>String</code> | The type of entry property (property/attribute) |
 | name | <code>String</code> | The property name |
+
+<a name="getEntryValueType"></a>
+
+## getEntryValueType(entry, propertyName) ⇒ <code>String</code>
+Get the entry value type
+
+**Kind**: global function  
+**Returns**: <code>String</code> - The entry value type (returns default "text"
+ if entry not specified)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| entry | <code>Entry</code> \| <code>null</code> | Entry instance |
+| propertyName | <code>String</code> | The entry property name |
+
+<a name="setEntryValueType"></a>
+
+## setEntryValueType(entry, propertyName, valueType)
+Set the value type attribute of an entry
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| entry | <code>Entry</code> | Entry instance |
+| propertyName | <code>String</code> | The property name |
+| valueType | <code>String</code> | The value type |
 
 <a name="ArchiveFacade"></a>
 
@@ -352,12 +386,9 @@ Entry facade data field
 | --- | --- | --- |
 | id | <code>String</code> | A randomly generated ID (UUID) for identifying this field during editing |
 | title | <code>String</code> | The user-friendly title of the field |
-| field | <code>String</code> | See `propertyType`- field is deprecated |
 | propertyType | <code>String</code> | The type of data to map back to on the Entry instance (property/attribute) |
 | property | <code>String</code> | The property name within the field type of the Entry instance |
 | value | <code>String</code> | The value of the property (read/write) |
-| secret | <code>Boolean</code> | Wether or not the value should be hidden while viewing (masked) |
-| multiline | <code>Boolean</code> | Whether the value should be edited as a multiline value or not |
+| [valueType] | <code>String</code> | The type of value (rendering) (null for attributes) |
 | formatting | [<code>EntryFacadeFieldFormatting</code>](#EntryFacadeFieldFormatting) \| <code>Boolean</code> | Vendor formatting options object, or false if no formatting necessary |
-| special | <code>null</code> \| <code>String</code> | Special display handling (internal) |
 

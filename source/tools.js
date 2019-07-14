@@ -36,7 +36,6 @@ const VALID_VALUE_TYPES = [
  * @typedef {Object} EntryFacadeField
  * @property {String} id - A randomly generated ID (UUID) for identifying this field during editing
  * @property {String} title - The user-friendly title of the field
- * @property {String} field - See `propertyType`- field is deprecated
  * @property {String} propertyType - The type of data to map back to on the Entry instance (property/attribute)
  * @property {String} property - The property name within the field type of the Entry instance
  * @property {String} value - The value of the property (read/write)
