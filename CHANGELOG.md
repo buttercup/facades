@@ -1,5 +1,14 @@
 # Buttercup Facades Changelog
 
+## v1.0.0
+_2019-07-14_
+
+ * New Entry facade field structure
+ * Entry facade field value types
+ * Facade property `field` removed
+ * Facade property `special` removed
+ * Facade fields `multiline` and `secret` removed in favour of `valueType`
+
 ## v0.8.1
 _2019-07-11_
 
