@@ -53,7 +53,28 @@ entryFacade.fields.push(field);
 consumeEntryFacade(entry, entryFacade);
 ```
 
-`createFieldDescriptor` has the following signature: `createFieldDescriptor(entry, title, fieldType, propertyName)`.
+`createFieldDescriptor` has the following signature: `createFieldDescriptor(entry, title, propertyType, propertyName)`.
+
+### Value types
+
+Facade fields (and therefore Buttercup entry properties) can have specific value types. The default is of course text, but types such as "note", "otp" and "password" can be applied:
+
+```javascript
+const {
+    FIELD_VALUE_TYPE_NOTE,
+    FIELD_VALUE_TYPE_OTP,
+    FIELD_VALUE_TYPE_PASSWORD,
+    FIELD_VALUE_TYPE_TEXT
+} = require("@buttercup/facades");
+
+const entryFacade = createEntryFacade(entry);
+const field = createFieldDescriptor(entry, "My Notes", "property", "My Notes", FIELD_VALUE_TYPE_NOTE);
+field.value = "My\nmultiline\nnote!";
+entryFacade.fields.push(field);
+consumeEntryFacade(entry, entryFacade);
+```
+
+Value types essentially only change how the entry property is rendered whilst viewing the data.
 
 ### Important notes regarding usage
 Facade consumption is inherently destructive, so be sure that when consuming facades you're applying the correct facade instance to the original class instance. Applying the wrong facade could potentially end up deleting all items (groups and entries) from the original archive instance.
