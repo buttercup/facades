@@ -41,6 +41,7 @@ const VALID_VALUE_TYPES = [
  * @property {String} value - The value of the property (read/write)
  * @property {String=} valueType - The type of value (rendering) (null for attributes)
  * @property {EntryFacadeFieldFormatting|Boolean} formatting - Vendor formatting options object, or false if no formatting necessary
+ * @property {Boolean} removeable - Whether or not the field can be removed or have its key changed
  */
 
 /**

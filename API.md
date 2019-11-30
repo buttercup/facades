@@ -391,4 +391,5 @@ Entry facade data field
 | value | <code>String</code> | The value of the property (read/write) |
 | [valueType] | <code>String</code> | The type of value (rendering) (null for attributes) |
 | formatting | [<code>EntryFacadeFieldFormatting</code>](#EntryFacadeFieldFormatting) \| <code>Boolean</code> | Vendor formatting options object, or false if no formatting necessary |
+| removeable | <code>Boolean</code> | Whether or not the field can be removed or have its key changed |
 
