@@ -1,4 +1,5 @@
 const { consumeEntryFacade, createEntryFacade } = require("./entry.js");
+const { ENTRY_FACADE_TYPE_ATTRIBUTE } = require("./symbols.js");
 
 /**
  * Consume an archive facade and apply the differences to the archive
@@ -45,7 +46,6 @@ function consumeArchiveFacade(archive, facade) {
                 // this call to `findGroupByID` might return nothing..
                 targetItem.delete();
             }
-            // groups.splice(groups.findIndex(group => group.id === currentGroupFacade.id), 1);
         }
     });
     // Update facade properties after groups deletion
@@ -111,8 +111,12 @@ function consumeArchiveFacade(archive, facade) {
             const targetGroup = archive.findGroupByID(entryFacade.parentID);
             const newEntry = targetGroup.createEntry();
             entryFacade.id = newEntry.id;
+            if (entryFacade.type) {
+                newEntry.setAttribute(ENTRY_FACADE_TYPE_ATTRIBUTE, entryFacade.type);
+            }
         }
-        consumeEntryFacade(archive.findEntryByID(entryFacade.id), entryFacade);
+        const entryToUpdate = archive.findEntryByID(entryFacade.id);
+        consumeEntryFacade(entryToUpdate, entryFacade);
     });
     // Check attributes
     Object.keys(currentAttributes)

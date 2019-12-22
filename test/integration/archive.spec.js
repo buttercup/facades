@@ -60,6 +60,17 @@ describe("archive", function() {
             ).to.be.an.instanceOf(Entry);
         });
 
+        it("supports adding entries of other types", function() {
+            const facade = createArchiveFacade(this.archive);
+            const entryFacade = createEntryFacade(null, { type: "note" });
+            entryFacade.fields.find(field => field.property === "title").value = "Test Entry";
+            entryFacade.parentID = this.topGroup.id;
+            facade.entries.push(entryFacade);
+            consumeArchiveFacade(this.archive, facade);
+            const entry = this.archive.findEntriesByProperty("title", "Test Entry")[0];
+            expect(entry.getAttribute(Entry.Attributes.FacadeType)).to.equal("note");
+        });
+
         it("supports deleting groups", function() {
             const facade = createArchiveFacade(this.archive);
             const topGroupID = this.topGroup.id;

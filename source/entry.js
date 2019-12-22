@@ -1,6 +1,6 @@
 const facadeFieldFactories = require("./entryFields.js");
 const { createFieldDescriptor, getEntryValueType, setEntryValueType } = require("./tools.js");
-const { ENTRY_FACADE_TYPE_ATTRIBUTE } = require("./symbols.js");
+const { ENTRY_FACADE_TYPE_ATTRIBUTE, ENTRY_TYPE_LOGIN } = require("./symbols.js");
 
 /**
  * Add extra fields to a fields array that are not mentioned in a preset
@@ -131,6 +131,21 @@ function createEntryFacade(entry, { type } = {}) {
     const fields = entry
         ? addExtraFieldsNonDestructive(entry, createFields(entry))
         : createFields(entry);
+    if (
+        !fields.find(
+            field =>
+                field.propertyType === "attribute" && field.property === ENTRY_FACADE_TYPE_ATTRIBUTE
+        )
+    ) {
+        const entryTypeField = createFieldDescriptor(
+            entry, // Entry instance
+            "", // Title
+            "attribute", // Type
+            ENTRY_FACADE_TYPE_ATTRIBUTE // Property name
+        );
+        entryTypeField.value = facadeType;
+        fields.push(entryTypeField);
+    }
     return {
         id: entry ? entry.id : null,
         type: facadeType,
