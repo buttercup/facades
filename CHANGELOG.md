@@ -1,5 +1,11 @@
 # Buttercup Facades Changelog
 
+## v1.0.1
+_2019-12-22_
+
+ * **Bugfix**:
+   * Creating new entries with non-default types would throw
+
 ## v1.0.0
 _2019-07-14_
 
