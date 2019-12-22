@@ -1,6 +1,6 @@
 {
   "name": "@buttercup/facades",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Archive and Entry facade management for data transfer and application",
   "main": "source/index.js",
   "scripts": {
