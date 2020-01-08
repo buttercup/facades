@@ -1,4 +1,17 @@
 /**
+ * Default entry type
+ * @type {String}
+ * @memberof module:ButtercupFacades
+ */
+const DEFAULT_ENTRY_TYPE = "login";
+/**
+ * Default entry field type
+ * @type {String}
+ * @memberof module:ButtercupFacades
+ */
+const DEFAULT_FIELD_TYPE = "text";
+
+/**
  * Facade type flag for an entry (specifies what type of entry it is)
  * @type {String}
  * @memberof module:ButtercupFacades
@@ -37,17 +50,38 @@ const ENTRY_TYPE_SSHKEY = "ssh_key";
 const ENTRY_TYPE_WEBSITE = "website";
 
 /**
+ * @typedef {Object} EntryTypeSpecification
+ * @property {String} title The title of the entry type
+ * @property {String} slug The slug of the entry type
+ */
+
+/**
  * Entry types collection (all available)
- * @type {Array.<String>}
+ * @type {Object.<String,EntryTypeSpecification>}
  * @memberof module:ButtercupFacades
  */
-const ENTRY_TYPES = [
-    ENTRY_TYPE_CREDITCARD,
-    ENTRY_TYPE_LOGIN,
-    ENTRY_TYPE_NOTE,
-    ENTRY_TYPE_SSHKEY,
-    ENTRY_TYPE_WEBSITE
-];
+const ENTRY_TYPES = {
+    [ENTRY_TYPE_CREDITCARD]: {
+        title: "Credit Card",
+        slug: ENTRY_TYPE_CREDITCARD
+    },
+    [ENTRY_TYPE_LOGIN]: {
+        title: "Login",
+        slug: ENTRY_TYPE_LOGIN
+    },
+    [ENTRY_TYPE_NOTE]: {
+        title: "Note",
+        slug: ENTRY_TYPE_NOTE
+    },
+    [ENTRY_TYPE_SSHKEY]: {
+        title: "SSH Key Pair",
+        slug: ENTRY_TYPE_SSHKEY
+    },
+    [ENTRY_TYPE_WEBSITE]: {
+        title: "Website Login",
+        slug: ENTRY_TYPE_WEBSITE
+    }
+};
 
 /**
  * Note type entry field value
@@ -75,6 +109,8 @@ const FIELD_VALUE_TYPE_PASSWORD = "password";
 const FIELD_VALUE_TYPE_TEXT = "text";
 
 module.exports = {
+    DEFAULT_ENTRY_TYPE,
+    DEFAULT_FIELD_TYPE,
     ENTRY_FACADE_TYPE_ATTRIBUTE,
     ENTRY_TYPE_CREDITCARD,
     ENTRY_TYPE_LOGIN,
