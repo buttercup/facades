@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v1.1.0
+_2020-01-09_
+
+ * Entry types and field value types collections exported
+
 ## v1.0.1
 _2019-12-22_
 

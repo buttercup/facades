@@ -50,6 +50,8 @@ Takes data from the descriptor and writes it to the entry.</p>
 </dd>
 <dt><a href="#CreateEntryFacadeOptions">CreateEntryFacadeOptions</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#FlagSpecification">FlagSpecification</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#EntryFacadeFieldFormattingSegment">EntryFacadeFieldFormattingSegment</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#EntryFacadeFieldFormatting">EntryFacadeFieldFormatting</a> : <code>Object</code></dt>
@@ -64,6 +66,20 @@ Takes data from the descriptor and writes it to the entry.</p>
 ## ButtercupFacades
 
 * [ButtercupFacades](#module_ButtercupFacades)
+    * [.DEFAULT_ENTRY_TYPE](#module_ButtercupFacades.DEFAULT_ENTRY_TYPE) : <code>String</code>
+    * [.DEFAULT_FIELD_TYPE](#module_ButtercupFacades.DEFAULT_FIELD_TYPE) : <code>String</code>
+    * [.ENTRY_FACADE_TYPE_ATTRIBUTE](#module_ButtercupFacades.ENTRY_FACADE_TYPE_ATTRIBUTE) : <code>String</code>
+    * [.ENTRY_TYPE_CREDITCARD](#module_ButtercupFacades.ENTRY_TYPE_CREDITCARD) : <code>String</code>
+    * [.ENTRY_TYPE_LOGIN](#module_ButtercupFacades.ENTRY_TYPE_LOGIN) : <code>String</code>
+    * [.ENTRY_TYPE_NOTE](#module_ButtercupFacades.ENTRY_TYPE_NOTE) : <code>String</code>
+    * [.ENTRY_TYPE_SSHKEY](#module_ButtercupFacades.ENTRY_TYPE_SSHKEY) : <code>String</code>
+    * [.ENTRY_TYPE_WEBSITE](#module_ButtercupFacades.ENTRY_TYPE_WEBSITE) : <code>String</code>
+    * [.ENTRY_TYPES](#module_ButtercupFacades.ENTRY_TYPES) : <code>Object.&lt;String, FlagSpecification&gt;</code>
+    * [.FIELD_VALUE_TYPE_NOTE](#module_ButtercupFacades.FIELD_VALUE_TYPE_NOTE) : <code>String</code>
+    * [.FIELD_VALUE_TYPE_OTP](#module_ButtercupFacades.FIELD_VALUE_TYPE_OTP) : <code>String</code>
+    * [.FIELD_VALUE_TYPE_PASSWORD](#module_ButtercupFacades.FIELD_VALUE_TYPE_PASSWORD) : <code>String</code>
+    * [.FIELD_VALUE_TYPE_TEXT](#module_ButtercupFacades.FIELD_VALUE_TYPE_TEXT) : <code>String</code>
+    * [.FIELD_VALUE_TYPES](#module_ButtercupFacades.FIELD_VALUE_TYPES) : <code>Object.&lt;String, FlagSpecification&gt;</code>
     * [.consumeArchiveFacade(archive, facade)](#module_ButtercupFacades.consumeArchiveFacade)
     * [.consumeGroupFacade(group, facade)](#module_ButtercupFacades.consumeGroupFacade)
     * [.createArchiveFacade(archive)](#module_ButtercupFacades.createArchiveFacade) ⇒ [<code>ArchiveFacade</code>](#ArchiveFacade)
@@ -73,6 +89,90 @@ Takes data from the descriptor and writes it to the entry.</p>
     * [.getEntryFacadeType(entry)](#module_ButtercupFacades.getEntryFacadeType) ⇒ <code>String</code>
     * [.createFieldDescriptor(entry, title, entryPropertyType, entryPropertyName, options)](#module_ButtercupFacades.createFieldDescriptor) ⇒ [<code>EntryFacadeField</code>](#EntryFacadeField)
 
+<a name="module_ButtercupFacades.DEFAULT_ENTRY_TYPE"></a>
+
+### ButtercupFacades.DEFAULT\_ENTRY\_TYPE : <code>String</code>
+Default entry type
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.DEFAULT_FIELD_TYPE"></a>
+
+### ButtercupFacades.DEFAULT\_FIELD\_TYPE : <code>String</code>
+Default entry field type
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.ENTRY_FACADE_TYPE_ATTRIBUTE"></a>
+
+### ButtercupFacades.ENTRY\_FACADE\_TYPE\_ATTRIBUTE : <code>String</code>
+Facade type flag for an entry (specifies what type of entry it is)
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.ENTRY_TYPE_CREDITCARD"></a>
+
+### ButtercupFacades.ENTRY\_TYPE\_CREDITCARD : <code>String</code>
+Credit-card entry type
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.ENTRY_TYPE_LOGIN"></a>
+
+### ButtercupFacades.ENTRY\_TYPE\_LOGIN : <code>String</code>
+Login (default) entry type
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.ENTRY_TYPE_NOTE"></a>
+
+### ButtercupFacades.ENTRY\_TYPE\_NOTE : <code>String</code>
+Note entry type
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.ENTRY_TYPE_SSHKEY"></a>
+
+### ButtercupFacades.ENTRY\_TYPE\_SSHKEY : <code>String</code>
+SSH public/private key-pair entry type
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.ENTRY_TYPE_WEBSITE"></a>
+
+### ButtercupFacades.ENTRY\_TYPE\_WEBSITE : <code>String</code>
+Website entry type (includes URL)
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.ENTRY_TYPES"></a>
+
+### ButtercupFacades.ENTRY\_TYPES : <code>Object.&lt;String, FlagSpecification&gt;</code>
+Entry types collection (all available)
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.FIELD_VALUE_TYPE_NOTE"></a>
+
+### ButtercupFacades.FIELD\_VALUE\_TYPE\_NOTE : <code>String</code>
+Note type entry field value
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.FIELD_VALUE_TYPE_OTP"></a>
+
+### ButtercupFacades.FIELD\_VALUE\_TYPE\_OTP : <code>String</code>
+OTP (One Time Password) type entry field value
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.FIELD_VALUE_TYPE_PASSWORD"></a>
+
+### ButtercupFacades.FIELD\_VALUE\_TYPE\_PASSWORD : <code>String</code>
+Password type entry field value
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.FIELD_VALUE_TYPE_TEXT"></a>
+
+### ButtercupFacades.FIELD\_VALUE\_TYPE\_TEXT : <code>String</code>
+Text (default) type entry field value
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+<a name="module_ButtercupFacades.FIELD_VALUE_TYPES"></a>
+
+### ButtercupFacades.FIELD\_VALUE\_TYPES : <code>Object.&lt;String, FlagSpecification&gt;</code>
+Entry field value types collection (all available)
+
+**Kind**: static constant of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
 <a name="module_ButtercupFacades.consumeArchiveFacade"></a>
 
 ### ButtercupFacades.consumeArchiveFacade(archive, facade)
@@ -348,6 +448,17 @@ Entry facade for data input
 | Name | Type | Description |
 | --- | --- | --- |
 | [type] | <code>String</code> | Optionally override the created facade type |
+
+<a name="FlagSpecification"></a>
+
+## FlagSpecification : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| title | <code>String</code> | The title of the entry type |
+| slug | <code>String</code> | The slug of the entry type |
 
 <a name="EntryFacadeFieldFormattingSegment"></a>
 
