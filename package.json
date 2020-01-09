@@ -12,6 +12,10 @@
     "test:integration": "mocha -r test/index.js 'test/integration/**/*.spec.js'",
     "test:unit": "mocha -r test/index.js 'test/unit/**/*.spec.js'"
   },
+  "files": [
+    "source/**/*.js",
+    "*.md"
+  ],
   "lint-staged": {
     "{source,test}/**/*.js": [
       "prettier --write",
