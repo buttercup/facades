@@ -15,7 +15,8 @@ describe("index", function() {
             "FIELD_VALUE_TYPE_NOTE",
             "FIELD_VALUE_TYPE_OTP",
             "FIELD_VALUE_TYPE_PASSWORD",
-            "FIELD_VALUE_TYPE_TEXT"
+            "FIELD_VALUE_TYPE_TEXT",
+            "FIELD_VALUE_TYPES"
         ].forEach(symbolName => {
             it(`defines '${symbolName}'`, function() {
                 expect(ButtercupFacades).to.have.property(symbolName);

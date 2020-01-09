@@ -50,14 +50,14 @@ const ENTRY_TYPE_SSHKEY = "ssh_key";
 const ENTRY_TYPE_WEBSITE = "website";
 
 /**
- * @typedef {Object} EntryTypeSpecification
+ * @typedef {Object} FlagSpecification
  * @property {String} title The title of the entry type
  * @property {String} slug The slug of the entry type
  */
 
 /**
  * Entry types collection (all available)
- * @type {Object.<String,EntryTypeSpecification>}
+ * @type {Object.<String,FlagSpecification>}
  * @memberof module:ButtercupFacades
  */
 const ENTRY_TYPES = {
@@ -108,6 +108,30 @@ const FIELD_VALUE_TYPE_PASSWORD = "password";
  */
 const FIELD_VALUE_TYPE_TEXT = "text";
 
+/**
+ * Entry field value types collection (all available)
+ * @type {Object.<String,FlagSpecification>}
+ * @memberof module:ButtercupFacades
+ */
+const FIELD_VALUE_TYPES = {
+    [FIELD_VALUE_TYPE_NOTE]: {
+        title: "Note",
+        slug: FIELD_VALUE_TYPE_NOTE
+    },
+    [FIELD_VALUE_TYPE_OTP]: {
+        title: "OTP (One Time Password)",
+        slug: FIELD_VALUE_TYPE_OTP
+    },
+    [FIELD_VALUE_TYPE_PASSWORD]: {
+        title: "Password (secret)",
+        slug: FIELD_VALUE_TYPE_PASSWORD
+    },
+    [FIELD_VALUE_TYPE_TEXT]: {
+        title: "Text (default)",
+        slug: FIELD_VALUE_TYPE_TEXT
+    }
+};
+
 module.exports = {
     DEFAULT_ENTRY_TYPE,
     DEFAULT_FIELD_TYPE,
@@ -121,5 +145,6 @@ module.exports = {
     FIELD_VALUE_TYPE_NOTE,
     FIELD_VALUE_TYPE_OTP,
     FIELD_VALUE_TYPE_PASSWORD,
-    FIELD_VALUE_TYPE_TEXT
+    FIELD_VALUE_TYPE_TEXT,
+    FIELD_VALUE_TYPES
 };
