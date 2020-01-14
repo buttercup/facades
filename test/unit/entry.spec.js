@@ -48,5 +48,10 @@ describe("entry", function() {
             expect(attr).to.have.property("value", "test");
             expect(attr).to.have.property("valueType", null);
         });
+
+        it("outputs history", function() {
+            const { _history } = createEntryFacade(this.entry);
+            expect(_history).to.have.length.above(0);
+        });
     });
 });

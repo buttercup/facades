@@ -150,7 +150,8 @@ function createEntryFacade(entry, { type } = {}) {
         id: entry ? entry.id : null,
         type: facadeType,
         fields,
-        parentID: entry ? entry.getGroup().id : null
+        parentID: entry ? entry.getGroup().id : null,
+        _history: entry ? entry.getChanges() : []
     };
 }
 

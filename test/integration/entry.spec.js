@@ -13,6 +13,7 @@ describe("entry", function() {
             this.entry = archive.createGroup("test").createEntry("Bank");
             this.entry
                 .setProperty("username", "u12345")
+                .setProperty("password", "original")
                 .setProperty("password", "passw0rd")
                 .setProperty("URL", "https://bank.com")
                 .setProperty("Note", "test\nnote")
@@ -58,6 +59,34 @@ describe("entry", function() {
             expect(this.entry.getAttribute(`${Entry.Attributes.FieldTypePrefix}Note`)).to.equal(
                 FIELD_VALUE_TYPE_NOTE
             );
+        });
+
+        it("outputs property history", function() {
+            this.entry.deleteProperty("password");
+            this.facade = createEntryFacade(this.entry);
+            const passwordChanges = this.facade._history.filter(
+                hist => hist.property === "password" && hist.propertyType === "property"
+            );
+            expect(passwordChanges).to.deep.equal([
+                {
+                    property: "password",
+                    propertyType: "property",
+                    originalValue: null,
+                    newValue: "original"
+                },
+                {
+                    property: "password",
+                    propertyType: "property",
+                    originalValue: "original",
+                    newValue: "passw0rd"
+                },
+                {
+                    property: "password",
+                    propertyType: "property",
+                    originalValue: "passw0rd",
+                    newValue: null
+                }
+            ]);
         });
     });
 
