@@ -41,11 +41,11 @@
   },
   "homepage": "https://github.com/buttercup/facades#readme",
   "peerDependencies": {
-    "buttercup": ">= 3.0.0-rc2.1"
+    "buttercup": ">= 3.0.0-rc3.0"
   },
   "devDependencies": {
     "@buttercup/app-env": "^0.1.1",
-    "buttercup": "3.0.0-rc2.1",
+    "buttercup": "3.0.0-rc3.0",
     "chai": "^4.2.0",
     "husky": "^4.0.9",
     "jsdoc-to-markdown": "^5.0.3",
