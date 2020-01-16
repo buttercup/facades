@@ -42,12 +42,23 @@ function addExtraFieldsNonDestructive(entry, fields) {
 }
 
 /**
+ * @typedef {Object} EntryHistoryItem
+ * @property {String} property The property/attribute name
+ * @property {String} propertyType Either "property" or "attribute"
+ * @property {String|null} originalValue The original value or null if it did not exist
+ *  before this change
+ * @property {String|null} newValue The new value or null if it was deleted
+ */
+
+/**
  * Entry facade for data input
  * @typedef {Object} EntryFacade
  * @property {String} id - The entry ID
  * @property {String} type - The type of the facade
  * @property {Array.<EntryFacadeField>} fields - An array of fields
  * @property {String} parentID - The parent group ID
+ * @property {Array.<EntryHistoryItem>} _history - Array of changes for all properties of
+ *  the entry
  */
 
 /**
