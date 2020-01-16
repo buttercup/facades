@@ -76,5 +76,10 @@ consumeEntryFacade(entry, entryFacade);
 
 Value types essentially only change how the entry property is rendered whilst viewing the data.
 
+### Special facade properties
+
+Properties may be prefixed with an underscore, such as with `_history`. These properties are created when a facade is generated, but are not processed at the time of consumption.
+
 ### Important notes regarding usage
+
 Facade consumption is inherently destructive, so be sure that when consuming facades you're applying the correct facade instance to the original class instance. Applying the wrong facade could potentially end up deleting all items (groups and entries) from the original archive instance.

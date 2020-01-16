@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v1.2.0
+_2020-01-16_
+
+ * Entry property history
+
 ## v1.1.0
 _2020-01-09_
 

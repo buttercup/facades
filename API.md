@@ -45,6 +45,8 @@ Takes data from the descriptor and writes it to the entry.</p>
 <dd></dd>
 <dt><a href="#GroupFacade">GroupFacade</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#EntryHistoryItem">EntryHistoryItem</a> : <code>Object</code></dt>
+<dd></dd>
 <dt><a href="#EntryFacade">EntryFacade</a> : <code>Object</code></dt>
 <dd><p>Entry facade for data input</p>
 </dd>
@@ -424,6 +426,19 @@ Set the value type attribute of an entry
 | attributes | <code>Object</code> | A key/value list of group attributes |
 | parentID | <code>String</code> \| <code>null</code> | The parent group ID. Set to "0" if  it is to be created in the root. |
 
+<a name="EntryHistoryItem"></a>
+
+## EntryHistoryItem : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| property | <code>String</code> | The property/attribute name |
+| propertyType | <code>String</code> | Either "property" or "attribute" |
+| originalValue | <code>String</code> \| <code>null</code> | The original value or null if it did not exist  before this change |
+| newValue | <code>String</code> \| <code>null</code> | The new value or null if it was deleted |
+
 <a name="EntryFacade"></a>
 
 ## EntryFacade : <code>Object</code>
@@ -438,6 +453,7 @@ Entry facade for data input
 | type | <code>String</code> | The type of the facade |
 | fields | [<code>Array.&lt;EntryFacadeField&gt;</code>](#EntryFacadeField) | An array of fields |
 | parentID | <code>String</code> | The parent group ID |
+| _history | [<code>Array.&lt;EntryHistoryItem&gt;</code>](#EntryHistoryItem) | Array of changes for all properties of  the entry |
 
 <a name="CreateEntryFacadeOptions"></a>
 
