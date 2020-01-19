@@ -67,7 +67,7 @@ function consumeArchiveFacade(archive, facade) {
                 (refGroup !== null && refGroup.id !== groupParentID)
             ) {
                 // Group has different parent, so move
-                ref.moveTo(archive.findGroupByID(groupParentID));
+                ref.moveTo(groupParentID === "0" ? archive : archive.findGroupByID(groupParentID));
             }
         } else {
             // Handle group addition

@@ -97,5 +97,15 @@ describe("archive", function() {
             const otherGroupChildren = this.archive.findGroupByID(otherGroupID).getGroups();
             expect(otherGroupChildren[0].id).to.equal(bottomGroupID);
         });
+
+        it("supports moving groups to root", function() {
+            const facade = createArchiveFacade(this.archive);
+            const bottomGroupID = this.bottomGroup.id;
+            facade.groups.find(groupFacade => groupFacade.id === bottomGroupID).parentID = "0";
+            consumeArchiveFacade(this.archive, facade);
+            expect(this.archive.getGroups().find(g => g.id === bottomGroupID)).to.be.an.instanceOf(
+                Group
+            );
+        });
     });
 });
