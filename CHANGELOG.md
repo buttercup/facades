@@ -1,5 +1,11 @@
 # Buttercup Facades Changelog
 
+## v1.3.1
+_2020-01-19_
+
+ * **Bugfix**:
+   * Moving groups would throw an exception
+
 ## v1.3.0
 _2020-01-19_
 
