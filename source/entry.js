@@ -191,10 +191,16 @@ function getEntryFacadeType(entry) {
 function setEntryValue(entry, property, name, value, valueType) {
     switch (property) {
         case "property":
-            entry.setProperty(name, value);
+            if (entry.getProperty(name) !== value) {
+                // Only update if changed
+                entry.setProperty(name, value);
+            }
             break;
         case "attribute":
-            entry.setAttribute(name, value);
+            if (entry.getAttribute(name) !== value) {
+                // Only update if changed
+                entry.setAttribute(name, value);
+            }
             break;
         default:
             throw new Error(`Cannot set value: Unknown property type: ${property}`);
