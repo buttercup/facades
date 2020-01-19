@@ -1,5 +1,12 @@
 # Buttercup Facades Changelog
 
+## v1.3.3
+_2020-01-19_
+
+ * **Bugfix**:
+   * Groups not added from facade
+   * Groups not deleted safely when removed from facade by parent
+
 ## v1.3.2
 _2020-01-19_
 
