@@ -63,6 +63,7 @@
     }
   },
   "dependencies": {
+    "hash-sum": "^2.0.0",
     "uuid": "^3.3.3"
   }
 }
