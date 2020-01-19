@@ -6,6 +6,7 @@ const {
     createArchiveFacade,
     createGroupFacade
 } = require("./archive.js");
+const { isVaultFacade } = require("./detection.js");
 const symbols = require("./symbols.js");
 
 /**
@@ -21,7 +22,8 @@ module.exports = Object.assign(
         createEntryFacade,
         createGroupFacade,
         createFieldDescriptor,
-        getEntryFacadeType
+        getEntryFacadeType,
+        isVaultFacade
     },
     symbols
 );
