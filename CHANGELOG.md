@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v1.3.2
+_2020-01-19_
+
+ * Update entry property and attribute values only when they differ
+
 ## v1.3.1
 _2020-01-19_
 
