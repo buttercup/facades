@@ -8,6 +8,7 @@ describe("archive", function() {
         this.archive.setAttribute("ATTR_1", "one").setAttribute("ATTR_2", "two");
         const topGroup = (this.topGroup = this.archive.createGroup("top"));
         const bottomGroup = (this.bottomGroup = topGroup.createGroup("one").createGroup("two"));
+        this.otherGroup = this.archive.createGroup("other");
         topGroup.createGroup("three");
         this.entryA = topGroup
             .createEntry("Entry A")
@@ -83,6 +84,18 @@ describe("archive", function() {
             consumeArchiveFacade(this.archive, facade);
             expect(this.archive.findGroupByID(topGroupID)).to.be.null;
             expect(this.archive.findGroupByID(bottomGroupID)).to.be.null;
+        });
+
+        it("supports moving groups", function() {
+            const facade = createArchiveFacade(this.archive);
+            const otherGroupID = this.otherGroup.id;
+            const bottomGroupID = this.bottomGroup.id;
+            facade.groups.find(
+                groupFacade => groupFacade.id === bottomGroupID
+            ).parentID = otherGroupID;
+            consumeArchiveFacade(this.archive, facade);
+            const otherGroupChildren = this.archive.findGroupByID(otherGroupID).getGroups();
+            expect(otherGroupChildren[0].id).to.equal(bottomGroupID);
         });
     });
 });
