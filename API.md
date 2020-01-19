@@ -86,9 +86,11 @@ Takes data from the descriptor and writes it to the entry.</p>
     * [.consumeGroupFacade(group, facade)](#module_ButtercupFacades.consumeGroupFacade)
     * [.createArchiveFacade(archive)](#module_ButtercupFacades.createArchiveFacade) ⇒ [<code>ArchiveFacade</code>](#ArchiveFacade)
     * [.createGroupFacade(group, [parentID])](#module_ButtercupFacades.createGroupFacade)
+    * [.isVaultFacade(obj)](#module_ButtercupFacades.isVaultFacade) ⇒ <code>Boolean</code>
     * [.consumeEntryFacade(entry, facade)](#module_ButtercupFacades.consumeEntryFacade)
     * [.createEntryFacade([entry], [ops])](#module_ButtercupFacades.createEntryFacade) ⇒ [<code>EntryFacade</code>](#EntryFacade)
     * [.getEntryFacadeType(entry)](#module_ButtercupFacades.getEntryFacadeType) ⇒ <code>String</code>
+    * [.hashVaultFacade(vaultFacade)](#module_ButtercupFacades.hashVaultFacade) ⇒ <code>String</code>
     * [.createFieldDescriptor(entry, title, entryPropertyType, entryPropertyName, options)](#module_ButtercupFacades.createFieldDescriptor) ⇒ [<code>EntryFacadeField</code>](#EntryFacadeField)
 
 <a name="module_ButtercupFacades.DEFAULT_ENTRY_TYPE"></a>
@@ -224,6 +226,18 @@ Create a group facade from a Group instance
 | group | <code>Group</code> |  | The group instance |
 | [parentID] | <code>String</code> | <code>0</code> | The parent ID of the group |
 
+<a name="module_ButtercupFacades.isVaultFacade"></a>
+
+### ButtercupFacades.isVaultFacade(obj) ⇒ <code>Boolean</code>
+Check if an object is a vault facade
+
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+**Returns**: <code>Boolean</code> - True if a vault facade  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>Object</code> \| <code>\*</code> | The item to check |
+
 <a name="module_ButtercupFacades.consumeEntryFacade"></a>
 
 ### ButtercupFacades.consumeEntryFacade(entry, facade)
@@ -260,6 +274,19 @@ Get the facade type for an entry
 | Param | Type | Description |
 | --- | --- | --- |
 | entry | <code>Entry</code> | The entry instance |
+
+<a name="module_ButtercupFacades.hashVaultFacade"></a>
+
+### ButtercupFacades.hashVaultFacade(vaultFacade) ⇒ <code>String</code>
+Generate a hash of a vault facade (useful for detecting
+ if the vault differs from another copy)
+
+**Kind**: static method of [<code>ButtercupFacades</code>](#module_ButtercupFacades)  
+**Returns**: <code>String</code> - Hash string  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| vaultFacade | [<code>ArchiveFacade</code>](#ArchiveFacade) | A facade instance |
 
 <a name="module_ButtercupFacades.createFieldDescriptor"></a>
 

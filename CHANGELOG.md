@@ -1,5 +1,11 @@
 # Buttercup Facades Changelog
 
+## v1.3.0
+_2020-01-19_
+
+ * `hashVaultFacade` method for comparing facades
+ * `isVaultFacade` method for checking if an object is a vault facade
+
 ## v1.2.0
 _2020-01-16_
 
