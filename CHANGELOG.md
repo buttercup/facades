@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v1.4.0
+_2020-01-22_
+
+ * Regular expressions converted to strings for serialisation
+
 ## v1.3.4
 _2020-01-19_
 
