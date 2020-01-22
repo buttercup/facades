@@ -9,6 +9,8 @@ const {
     FIELD_VALUE_TYPE_PASSWORD
 } = require("./symbols.js");
 
+const DIGIT = "\\d";
+
 function createBaseFields(entry) {
     return [createFieldDescriptor(entry, "Title", "property", "title")];
 }
@@ -20,13 +22,13 @@ function createCreditCardFields(entry) {
         createFieldDescriptor(entry, "Card Number", "property", "password", {
             formatting: {
                 format: [
-                    { char: /\d/, repeat: 4 },
+                    { char: DIGIT, repeat: 4 },
                     { exactly: "-" },
-                    { char: /\d/, repeat: 4 },
+                    { char: DIGIT, repeat: 4 },
                     { exactly: "-" },
-                    { char: /\d/, repeat: 4 },
+                    { char: DIGIT, repeat: 4 },
                     { exactly: "-" },
-                    { char: /\d/, repeat: 4 }
+                    { char: DIGIT, repeat: 4 }
                 ],
                 placeholder: "DDDD-DDDD-DDDD-DDDD"
             }
@@ -45,7 +47,7 @@ function createCreditCardFields(entry) {
         }),
         createFieldDescriptor(entry, "CVV", "property", "cvv", {
             formatting: {
-                format: [{ char: /\d/, repeat: 4 }],
+                format: [{ char: DIGIT, repeat: 4 }],
                 placeholder: "DDD or DDDD"
             },
             valueType: FIELD_VALUE_TYPE_PASSWORD
@@ -53,11 +55,11 @@ function createCreditCardFields(entry) {
         createFieldDescriptor(entry, "Valid From", "property", "valid_from", {
             formatting: {
                 format: [
-                    { char: /[01]/, repeat: 1 },
-                    { char: /\d/, repeat: 1 },
+                    { char: "[01]", repeat: 1 },
+                    { char: DIGIT, repeat: 1 },
                     { exactly: "/" },
-                    { char: /2/, repeat: 1 },
-                    { char: /\d/, repeat: 3 }
+                    { char: "2", repeat: 1 },
+                    { char: DIGIT, repeat: 3 }
                 ],
                 placeholder: "MM/YYYY"
             },
@@ -66,11 +68,11 @@ function createCreditCardFields(entry) {
         createFieldDescriptor(entry, "Expiry", "property", "expiry", {
             formatting: {
                 format: [
-                    { char: /[01]/, repeat: 1 },
-                    { char: /\d/, repeat: 1 },
+                    { char: "[01]", repeat: 1 },
+                    { char: DIGIT, repeat: 1 },
                     { exactly: "/" },
-                    { char: /2/, repeat: 1 },
-                    { char: /\d/, repeat: 3 }
+                    { char: "2", repeat: 1 },
+                    { char: DIGIT, repeat: 3 }
                 ],
                 placeholder: "MM/YYYY"
             },
