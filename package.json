@@ -16,6 +16,11 @@
     "source/**/*.js",
     "*.md"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "{source,test}/**/*.js": [
       "prettier --write",
@@ -56,11 +61,6 @@
     "prettier": "^1.19.1",
     "prettier-check": "^2.0.0",
     "sinon": "^8.0.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "dependencies": {
     "hash-sum": "^2.0.0",
