@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v1.6.0
+_2020-01-24_
+
+ * Improved performance for `consumeArchiveFacade`
+
 ## v1.5.0
 _2020-01-24_
 
