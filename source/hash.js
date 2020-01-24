@@ -6,6 +6,7 @@ const hashSum = require("hash-sum");
  * @param {ArchiveFacade} vaultFacade A facade instance
  * @returns {String} Hash string
  * @memberof module:ButtercupFacades
+ * @deprecated Poor performance - rely on `ArchiveFacade#_tag` instead
  */
 function hashVaultFacade(vaultFacade) {
     const preparedObj = Object.assign({}, vaultFacade, {

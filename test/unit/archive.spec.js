@@ -50,6 +50,13 @@ describe("archive", function() {
             const { entries } = createArchiveFacade(this.archive);
             expect(entries).to.have.lengthOf(2);
         });
+
+        it("outputs a tag", function() {
+            const { _tag } = createArchiveFacade(this.archive);
+            expect(_tag)
+                .to.be.a("string")
+                .that.has.length.above(0);
+        });
     });
 
     describe("createGroupFacade", function() {

@@ -1,3 +1,4 @@
+const uuid = require("uuid/v4");
 const { consumeEntryFacade, createEntryFacade } = require("./entry.js");
 const { ENTRY_FACADE_TYPE_ATTRIBUTE } = require("./symbols.js");
 
@@ -194,6 +195,7 @@ function createArchiveFacade(archive) {
         .getGroups()
         .reduce((output, group) => [...output, ...getEntriesFacades(group)], []);
     return {
+        _tag: uuid(),
         type: "archive",
         id: archive.id,
         attributes: archive.getAttribute(),
