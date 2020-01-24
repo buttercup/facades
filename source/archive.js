@@ -50,7 +50,7 @@ function consumeArchiveFacade(archive, facade) {
         }
     });
     // Update facade properties after groups deletion
-    currentGroups = createArchiveFacade(archive).groups;
+    currentGroups = getGroupsFacades(archive);
     // Manage other group operations
     groups.forEach(groupRaw => {
         const groupFacade = Object.assign({}, groupRaw);
@@ -93,7 +93,7 @@ function consumeArchiveFacade(archive, facade) {
         }
     });
     // Update facade properties after entries deletion
-    currentEntries = createArchiveFacade(archive).entries;
+    currentEntries = getEntriesFacades(archive);
     // Manage other entry operations
     entries.forEach(entryRaw => {
         const entryFacade = Object.assign({}, entryRaw);
@@ -192,16 +192,13 @@ function consumeGroupFacade(group, facade) {
  * @memberof module:ButtercupFacades
  */
 function createArchiveFacade(archive) {
-    const entries = archive
-        .getGroups()
-        .reduce((output, group) => [...output, ...getEntriesFacades(group)], []);
     return {
         _tag: uuid(),
         type: "archive",
         id: archive.id,
         attributes: archive.getAttribute(),
-        groups: getGroupsFacades(archive, "0"),
-        entries
+        groups: getGroupsFacades(archive),
+        entries: getEntriesFacades(archive)
     };
 }
 
@@ -233,17 +230,28 @@ function createGroupFacade(group, parentID = "0") {
 }
 
 /**
+ * Get all entry facades for an archive
+ * @param {Archive} archive An archive instance
+ * @returns {Array.<EntryFacade>} An array of entry facades
+ */
+function getEntriesFacades(archive) {
+    return archive
+        .getGroups()
+        .reduce((output, group) => [...output, ...getGroupEntriesFacades(group)], []);
+}
+
+/**
  * Convert an array of entries into an array of facades
  * @param {Array.<Entry>} entryCollection An array of entries
  * @param {String} groupID The parent group ID
  * @returns {Array.<EntryFacade>} An array of entry facades
  */
-function getEntriesFacades(entryCollection, groupID) {
+function getGroupEntriesFacades(entryCollection, groupID) {
     const facades = entryCollection
         .getEntries()
         .map(entry => Object.assign({}, createEntryFacade(entry)));
     entryCollection.getGroups().forEach(group => {
-        facades.push(...getEntriesFacades(group, group.id));
+        facades.push(...getGroupEntriesFacades(group, group.id));
     });
     return facades;
 }
@@ -251,10 +259,10 @@ function getEntriesFacades(entryCollection, groupID) {
 /**
  * Convert an array of groups into an array of facades
  * @param {Array.<Group>} groupCollection An array of groups
- * @param {String} parentID The parent group ID
+ * @param {String=} parentID The parent group ID (defaults to root)
  * @returns {Array.<GroupFacade>} An array of group facades
  */
-function getGroupsFacades(groupCollection, parentID) {
+function getGroupsFacades(groupCollection, parentID = "0") {
     const facades = groupCollection.getGroups().map(group => createGroupFacade(group, parentID));
     groupCollection.getGroups().forEach(group => {
         facades.push(...getGroupsFacades(group, group.id));
