@@ -90,7 +90,7 @@ Takes data from the descriptor and writes it to the entry.</p>
     * [.consumeEntryFacade(entry, facade)](#module_ButtercupFacades.consumeEntryFacade)
     * [.createEntryFacade([entry], [ops])](#module_ButtercupFacades.createEntryFacade) ⇒ [<code>EntryFacade</code>](#EntryFacade)
     * [.getEntryFacadeType(entry)](#module_ButtercupFacades.getEntryFacadeType) ⇒ <code>String</code>
-    * [.hashVaultFacade(vaultFacade)](#module_ButtercupFacades.hashVaultFacade) ⇒ <code>String</code>
+    * ~~[.hashVaultFacade(vaultFacade)](#module_ButtercupFacades.hashVaultFacade) ⇒ <code>String</code>~~
     * [.createFieldDescriptor(entry, title, entryPropertyType, entryPropertyName, options)](#module_ButtercupFacades.createFieldDescriptor) ⇒ [<code>EntryFacadeField</code>](#EntryFacadeField)
 
 <a name="module_ButtercupFacades.DEFAULT_ENTRY_TYPE"></a>
@@ -277,7 +277,9 @@ Get the facade type for an entry
 
 <a name="module_ButtercupFacades.hashVaultFacade"></a>
 
-### ButtercupFacades.hashVaultFacade(vaultFacade) ⇒ <code>String</code>
+### ~~ButtercupFacades.hashVaultFacade(vaultFacade) ⇒ <code>String</code>~~
+***Deprecated***
+
 Generate a hash of a vault facade (useful for detecting
  if the vault differs from another copy)
 
@@ -438,6 +440,7 @@ Set the value type attribute of an entry
 | attributes | <code>Object</code> | A key/value list of all the archive attributes |
 | groups | [<code>Array.&lt;GroupFacade&gt;</code>](#GroupFacade) | An array of group facades |
 | entries | [<code>Array.&lt;EntryFacade&gt;</code>](#EntryFacade) | An array of entry facades |
+| _tag | <code>String</code> | The UUID tag for the generation of the facade |
 
 <a name="GroupFacade"></a>
 
