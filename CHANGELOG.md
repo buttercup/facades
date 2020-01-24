@@ -1,5 +1,10 @@
 # Buttercup Facades Changelog
 
+## v1.5.0
+_2020-01-24_
+
+ * `_tag` property for identifying different facades
+
 ## v1.4.0
 _2020-01-22_
 
