@@ -3,6 +3,10 @@
 
 [![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) [![Build Status](https://travis-ci.org/buttercup/facades.svg?branch=master)](https://travis-ci.org/buttercup/facades) [![npm version](https://badge.fury.io/js/%40buttercup%2Ffacades.svg)](https://www.npmjs.com/package/@buttercup/facades)
 
+## :warning: Deprecated
+
+This repository is deprecated since [Buttercup core](https://github.com/buttercup/buttercup-core) version 4, as it is now included in the core library. It is no longer required to include this library as its functionality can be found in the [`buttercup`](https://www.npmjs.com/package/buttercup) dependency.
+
 ## About
 This library contains facade functionality used for editing and applying changes to Buttercup vaults and their contained items. Facades are object representations of Buttercup's instance-based componets like `Archive`, `Group` and `Entry`. Facades can be transferred more easily than class instances and can be consumed using this library.
 
